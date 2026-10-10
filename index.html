@@ -162,7 +162,7 @@
 .trip-workshop .workshop-instructions{max-width:820px;margin:0 0 19px}
 .workshop-tools{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin:19px 0 19px}
 .workshop-counter{font-weight:900;font-size:13px;color:#246858;background:#e3efe9;border:1px solid #d4e3db;border-radius:40px;padding:12px 16px}
- .trip-workshop .gallery-filters{margin:8px 0 12px}
+
  .gallery-preset-hint{color:#506d64;font-size:12px;line-height:1.55;margin:17px 0 4px}
 .trip-workshop .gallery-count{margin:0 0 14px}
 .trip-workshop .places-gallery{margin-top:22px}
@@ -271,12 +271,12 @@
  <div class="wrap">
   <div class="section-kicker">VELG STEDER · BYGG RUTEN</div>
   <h2 id="steder">Dette kan dere oppleve</h2>
-  <p class="subtext workshop-instructions">Kryss av stedene dere har lyst til å besøke på bildene. Velg deretter hvor dere vil fly til og hjem fra, og lag et personlig ruteforslag under galleriet. Trykk på et bilde for å lese om stedet.</p>
+  <p class="subtext workshop-instructions">Dere kan lage en rute helt fra bunnen av ved å krysse av steder på bildene, eller velge en ferdig rute som utgangspunkt nedenfor. Velg deretter flyplasser og lag deres egen rute. Trykk på et bilde for å lese om stedet.</p>
   <div class="route-start-panel">
-   <div class="route-start-copy"><strong>Ta utgangspunkt i en ferdig rute</strong><span>Velg for eksempel rute 02. Stedene krysses automatisk av under, og dere kan legge til eller fjerne stopp som dere ønsker.</span></div>
+   <div class="route-start-copy"><strong>Ta utgangspunkt i en ferdig rute (valgfritt)</strong><span>Dere kan hoppe over dette og velge steder fritt. Velger dere å ta utgangspunkt i en av de foreslåtte rutene, krysses stoppene fra denne automatisk av. Alle de øvrige stedene vises fortsatt, slik at dere kan legge til eller fjerne stopp.</span></div>
    <label for="gallery-route-start" class="sr-only">Velg en ferdig rute som utgangspunkt</label>
    <select id="gallery-route-start" aria-label="Velg rute som utgangspunkt">
-    <option value="">Velg rute 01–06 …</option>
+    <option value="">Ingen ferdig rute – velg steder selv</option>
     <option value="co">Rute 01 – The Colorado Explorer</option>
     <option value="sw">Rute 02 – The Southwest Adventure</option>
     <option value="no">Rute 03 – The Northern Wilderness</option>
@@ -290,8 +290,6 @@
    <span class="workshop-counter" id="intro-selection-count" aria-live="polite">0 valgte reisemål</span>
    <button type="button" class="btn btn-light" id="clear-gallery-selection">↺ Nullstill valg</button>
   </div>
-  <p class="gallery-preset-hint">Hurtigvalg: Trykk på en rute for å krysse av stedene fra den. <strong>Alle reisemålene forblir synlige</strong>, slik at dere kan legge til og fjerne fritt.</p>
-  <div class="gallery-filters" id="gallery-filters" aria-label="Velg ferdig rute som utgangspunkt for avkryssing"></div>
   <div class="gallery-count" id="gallery-count" aria-live="polite"></div>
   <p class="gallery-geography"><b>Utenfor hovedrunden:</b> Kansas City er rundt 8½–9 timers kjøring øst for Denver. Lake Tahoe er rundt 8½ timer vest for Salt Lake City. De kan velges for sammenligning, men gir store omveier på kortere turer. Virginia City i Nevada er med som et valgbart reisemål og kan kombineres med Lake Tahoe.</p>
   <div class="places-gallery" id="places-gallery"></div>
@@ -781,7 +779,7 @@ function importPresetStops(id){
  save();if(hadCustomRoute)render();
  placesGallery();renderBuilderPreview();
  $('gallery-route-start').value=id;
- $('gallery-route-start-notice').textContent=`Rute ${routes[id].num}: ${selected.length} stopp er automatisk huket av. Alle ${galleryAllKeys.length} stedene vises nedenfor – rute-stoppene først, deretter de øvrige, så dere kan legge til eller fjerne fritt.`;
+ $('gallery-route-start-notice').textContent=`Stedene fra rute ${routes[id].num} er krysset av. Legg til eller fjern reisemål i bildegalleriet.`;
  $('airport-advice').textContent='Velg flyplassene dere ønsker, eller bruk «Finn anbefalte flyplasser» for en geografisk vurdering.';
  toast(`Rute ${routes[id].num} er klar til å tilpasses`);
 }
@@ -909,7 +907,7 @@ function googleCustomRoute(order){const parts=googleMapOptions(order);return par
 
 function wireBuilder(){for(const key of ['from','to'])$('custom-'+key).addEventListener('change',e=>{const hadCustomRoute=state.route==='custom';state['custom'+(key==='from'?'From':'To')]=e.target.value;state.customOrder=[];if(hadCustomRoute){state.route=state.lastPresetRoute;state.selectedDay=0;state.selectedStop=null;}save();if(hadCustomRoute)render();renderBuilderPreview()});
  $('custom-current').addEventListener('click',()=>{const preset=galleryRouteOrder.includes(state.route)?state.route:state.lastPresetRoute;if(!preset){toast('Velg først en av de seks rutene');return;}importPresetStops(preset);document.querySelector('#steder').scrollIntoView({behavior:'smooth',block:'start'});});
-  $('gallery-route-start').addEventListener('change',e=>importPresetStops(e.target.value));
+  $('gallery-route-start').addEventListener('change',e=>{if(e.target.value)importPresetStops(e.target.value);else resetCustomSelection();});
  $('custom-clear').addEventListener('click',resetCustomSelection);
  $('clear-gallery-selection').addEventListener('click',resetCustomSelection);
  $('custom-build').addEventListener('click',()=>{if(!customReady()){toast('Velg reisemål, fly til og fly hjem fra først');return;}if(state.route!=='custom')state.lastPresetRoute=state.route;state.customOrder=orderedCustom();state.route='custom';state.routeChosen=true;state.selectedDay=0;state.selectedStop=null;save();render();document.querySelector('#ruter .plan-top').scrollIntoView({behavior:'smooth',block:'start'});toast('Deres personlige rute er nå valgt ✓')});
@@ -941,22 +939,6 @@ function galleryPlaceTitle(key){
  return cleanPlaceName(original)+', '+state;
 }
 function placesGallery(){
- const filters=[['*',`Alle steder (${galleryAllKeys.length})`],...galleryRouteOrder.map(id=>[id,`Rute ${routes[id].num}`])];
- // Knappene er et hurtigtvalg for hvilke steder som skal hukes av, IKKE et filter.
- // Alle 52 bildekort skal alltid være synlige, også når en rute er forhåndsvalgt.
- const activePreset=galleryRouteOrder.includes(state.customBaseRoute)?state.customBaseRoute:'*';
- $('gallery-filters').innerHTML=filters.map(([id,name])=>`<button type="button" class="gallery-filter ${activePreset===id?'active':''}" data-gallery-filter="${id}" aria-pressed="${activePreset===id}" title="${id==='*'?'Vis alle steder uten gruppering':'Huk av stoppene fra '+name+' og vis fortsatt alle stedene'}">${escapeHTML(name)}</button>`).join('');
- $('gallery-filters').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
-  const id=b.dataset.galleryFilter;
-  if(id==='*'){
-   // Fjern bare gruppering, ikke den brukerdefinerte avkryssingen.
-   state.customBaseRoute='';galleryFilter='*';save();
-   $('gallery-route-start').value='';
-   $('gallery-route-start-notice').textContent=state.customKeys.length?'Alle reisemål vises alfabetisk etter delstat. De avkrysningene dere allerede har gjort, beholdes. Bruk «Nullstill valg» for å begynne helt på nytt.':'';
-   placesGallery();return;
-  }
-  importPresetStops(id);
- }));
  // Sorter først etter delstat, deretter alfabetisk etter stedsnavn innen hver delstat.
  const visible=[...galleryAllKeys].sort((a,b)=>{
   const sa=galleryStates[a]||'ZZ',sb=galleryStates[b]||'ZZ';
@@ -1247,7 +1229,7 @@ async function copySummary(){const t=summary();try{await navigator.clipboard.wri
  placesGallery();wireBuilder();wireTripControls();render();
  if(galleryRouteOrder.includes(state.customBaseRoute)){
   $('gallery-route-start').value=state.customBaseRoute;
-  $('gallery-route-start-notice').textContent=`Rute ${routes[state.customBaseRoute].num} brukes som utgangspunkt. Alle reisemål vises, og dere kan endre avkryssingene.`;
+  $('gallery-route-start-notice').textContent=`Stedene fra rute ${routes[state.customBaseRoute].num} er krysset av. Legg til eller fjern reisemål i bildegalleriet.`;
  }
  const mapPanel=document.querySelector('.planner-content .map-column');
  if(mapPanel&&typeof ResizeObserver!=='undefined'){new ResizeObserver(alignItineraryHeight).observe(mapPanel);}
