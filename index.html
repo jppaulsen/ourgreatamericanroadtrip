@@ -150,6 +150,7 @@
 .km-footer .km-retry:hover{background:#e9f5ef}
 .km-footer a{color:#17685d;font-weight:700;text-decoration:underline}
 @media(max-width:600px){.route-view-button{font-size:12px}.km-leg{min-height:67px}.km-value{font-size:14px}}
+
 </style>
 <style>
 .custom-intro{padding:68px 0 18px;background:#f1efe7}.custom-intro h2{font-family:var(--head);font-size:clamp(31px,4vw,46px);letter-spacing:-.04em;margin:8px 0 13px}.custom-intro .subtext{max-width:850px}.intro-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:20px 0 2px}.intro-actions span{font-size:13px;color:#44645d;font-weight:800}.section-tight#steder{padding-top:30px}.section.custom-section{padding-top:25px}.day-details{display:none!important}.inline-stop{margin:0 2px 12px;border:1px solid #c6d9cf;background:#fff;border-radius:0 0 16px 16px;overflow:hidden;animation:revealPlace .18s ease-out}.inline-stop-photo{height:205px;background-size:cover;background-position:center;position:relative;overflow:hidden;background-color:#54736f}.inline-stop-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block}.inline-photo-credit{position:absolute;bottom:10px;right:10px;background:#132c32df;color:#fff!important;font-size:11px;padding:7px 10px;text-decoration:none;border-radius:7px;z-index:1}.inline-stop-content{padding:20px 18px 22px}.inline-stop-content h5{font-family:var(--head);font-size:25px;letter-spacing:-.035em;margin:0 0 9px;line-height:1.2}.inline-stop-content p{color:#586965;font-size:13px;line-height:1.68;margin:8px 0 12px}.inline-highlights{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.inline-highlights span{border-radius:20px;background:#eaf1ea;font-size:11px;font-weight:700;color:#336056;padding:6px 9px}.inline-stop-content .inline-tip{background:#fff4e8;color:#77533e;padding:12px;border-radius:10px}.inline-stop-content .inline-trip{background:#f2f4ee;padding:12px;border-radius:10px}.inline-map-link{display:inline-block;background:#143138;color:#fff;text-decoration:none;border-radius:9px;padding:10px 12px;font-size:12px;font-weight:800}.day-stop[aria-expanded="true"]{border-radius:14px 14px 0 0;border-color:#2e796d}.hero-meta{display:none}.custom-intro + #steder{scroll-margin-top:90px}@keyframes revealPlace{from{opacity:.4;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}@media(max-width:650px){.inline-stop-photo{height:180px}.inline-stop-content{padding:15px}.custom-intro{padding-top:45px}}
@@ -262,6 +263,193 @@
 #trip-global-warning b,
 .resources-disclaimer b {font-weight:800}
 </style>
+
+<!-- Consistent spacing system -->
+<style>
+/* Et felles luftsystem: 8/12/20/24/32/64 px. Beholder alle eksisterende seksjoner og funksjoner. */
+:root {
+  --gap-compact: 8px;
+  --gap-text: 12px;
+  --gap-element: 20px;
+  --gap-block: 24px;
+  --gap-large: 32px;
+  --gap-section: 64px;
+}
+
+/* Lik høyde og avstand rundt alle fire hovedseksjoner */
+#ruter, #sammenlign, .section.trip-workshop, .resources-section {
+  padding-top: var(--gap-section);
+  padding-bottom: var(--gap-section);
+}
+
+/* Lik typografisk rytme: etikett -> overskrift -> forklaring -> innhold */
+#ruter .section-head,
+#sammenlign .section-head { margin: 0 0 var(--gap-block); }
+#ruter h2,
+#sammenlign h2,
+#bygg h2,
+.resources-section h2 {
+  margin: var(--gap-compact) 0 var(--gap-text);
+  line-height: 1.1;
+}
+#ruter .subtext,
+#sammenlign .subtext,
+#bygg .workshop-instructions {
+  margin: 0;
+  line-height: 1.7;
+}
+#bygg .workshop-instructions { margin-bottom: var(--gap-block); }
+.resources-section h2 { margin-bottom: var(--gap-block); }
+
+/* Ruter: ett jevnt mellomrom mellom introduksjon, dagvalg og rutekort */
+#ruter .trip-duration { margin: 0 0 var(--gap-block); }
+#ruter .route-welcome,
+#ruter .plan-shell { margin-top: var(--gap-element); }
+.route-info { padding-bottom: var(--gap-element); }
+
+/* Bildevelgeren: fjern sammenlagte marginer fra flere eldre oppsett */
+#bygg .route-start-panel { margin: 0 0 var(--gap-element); }
+#bygg .route-start-notice:not(:empty) { margin: -8px 0 var(--gap-text); }
+#bygg .workshop-tools { margin: 0 0 var(--gap-text); gap: var(--gap-text); }
+#bygg .gallery-count { margin: 0 0 var(--gap-text); }
+#bygg .gallery-geography { margin: 0 0 var(--gap-block); }
+#bygg .places-gallery { margin-top: 0; }
+#bygg .workshop-finish { margin-top: var(--gap-block); }
+#bygg .workshop-current-choice { margin-top: var(--gap-element); }
+
+/* Sammenligning og advarsler */
+#sammenlign .compare { margin-top: var(--gap-block); }
+#sammenlign #trip-global-warning { margin-top: var(--gap-element); }
+#sammenlign #trip-global-warning p + p { margin-top: var(--gap-text); }
+.compare-card { gap: var(--gap-text); }
+
+/* Praktiske råd og forbehold */
+.resources-grid { gap: var(--gap-element); }
+.resources-disclaimer { margin-top: var(--gap-element); }
+.resource-card h3 { margin: 0 0 var(--gap-text); }
+.resource-card p { margin-bottom: 0; }
+
+/* Stedskort, rutevisning og handlingsknapper */
+.map-stop-buttons { margin: var(--gap-text) 0 var(--gap-compact); }
+#map-external-links { margin-top: var(--gap-element); }
+.map-hint { margin-top: var(--gap-text); }
+.day-group { margin: var(--gap-compact) 0 var(--gap-text); }
+.route-view-switch { margin: var(--gap-text) 0 var(--gap-element); }
+
+@media(max-width:650px) {
+  :root { --gap-section: 46px; --gap-block: 20px; --gap-element: 16px; }
+  #ruter, #sammenlign, .section.trip-workshop, .resources-section {
+    padding-top: var(--gap-section);
+    padding-bottom: var(--gap-section);
+  }
+  #ruter .section-head { margin-bottom: var(--gap-block); }
+  #bygg .route-start-panel { margin-bottom: var(--gap-element); }
+  #bygg .workshop-finish { margin-top: var(--gap-block); }
+  .resources-grid { gap: var(--gap-element); }
+}
+@media print {
+  #ruter, #sammenlign, .section.trip-workshop, .resources-section { padding: 20px 0; }
+}
+/* Layoutopprydding: ett bevisst avstandssystem og samlet valgpanel.
+   Tidligere regler får stå som reserve for andre visninger; disse er målrettede. */
+:root {
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-section: 64px;
+}
+#ruter, #bygg, #sammenlign, .resources-section {
+  padding-block: var(--space-section);
+}
+#bygg .workshop-instructions {
+  margin: 0 0 var(--space-lg);
+  max-width: 820px;
+}
+#bygg .selection-panel {
+  background: #fff;
+  border: 1px solid #dbe5dc;
+  border-radius: 20px;
+  padding: var(--space-lg);
+  margin: 0 0 var(--space-lg);
+  box-shadow: 0 8px 28px rgba(21,45,49,.045);
+}
+#bygg .selection-panel .route-start-panel {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+#bygg .selection-panel .route-start-copy { gap: var(--space-xs); }
+#bygg .selection-panel .route-start-copy span { line-height: 1.6; }
+#bygg .selection-panel-actions {
+  border-top: 1px solid #e5ebe5;
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+}
+#bygg .selection-panel .workshop-tools {
+  margin: 0;
+  gap: var(--space-sm);
+}
+#bygg .selection-panel .gallery-count,
+#bygg .selection-panel .route-start-notice {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+#bygg .places-gallery {
+  margin: 0;
+  gap: var(--space-md);
+}
+#bygg .gallery-section-label {
+  margin: 0;
+  padding: var(--space-sm) var(--space-md);
+}
+#bygg .gallery-section-label.other { margin-top: var(--space-md); }
+#bygg .gallery-geography {
+  margin: var(--space-lg) 0 0;
+}
+#bygg .workshop-finish {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg);
+}
+#bygg .workshop-current-choice {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+}
+#ruter .route-grid { gap: var(--space-md); }
+#ruter .trip-duration { margin-bottom: var(--space-lg); }
+#sammenlign .compare { margin-top: var(--space-lg); gap: var(--space-md); }
+#sammenlign #trip-global-warning { margin-top: var(--space-lg); }
+.resources-section .resources-grid { gap: var(--space-lg); }
+.resources-section .resources-disclaimer { margin-top: var(--space-lg); }
+@media (max-width:940px) {
+  #ruter .route-grid { gap: var(--space-sm); }
+}
+@media (max-width:680px) {
+  :root { --space-section: 46px; --space-lg: 20px; --space-md: 14px; }
+  #bygg .selection-panel { padding: var(--space-md); }
+  #bygg .selection-panel .route-start-panel {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-md);
+  }
+  #bygg .selection-panel .route-start-panel select { width: 100%; min-width: 0; }
+  #bygg .workshop-finish { padding: var(--space-md); }
+}
+</style>
 </head>
 <body>
 <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="#top"><span class="brandmark">✦</span><span>USA ROADTRIP <span style="color:#f4ba7e">/ 2027</span></span></a><nav class="topnav"><a href="#ruter">Rutealternativer</a><a href="#bygg">Lag egen rute</a><a href="#sammenlign">Sammenlign</a></nav></div></header>
@@ -295,28 +483,32 @@
  <div class="wrap">
   <div class="section-kicker">VELG STEDER · BYGG RUTEN</div>
   <h2 id="steder">Dette kan dere oppleve</h2>
-  <p class="subtext workshop-instructions">Dere kan lage en rute helt fra bunnen av ved å krysse av steder på bildene, eller velge en ferdig rute som utgangspunkt nedenfor. Velg deretter flyplasser og lag deres egen rute. Trykk på et bilde for å lese om stedet.</p>
-  <div class="route-start-panel">
-   <div class="route-start-copy"><strong>Ta utgangspunkt i en ferdig rute (valgfritt)</strong><span>Dere kan hoppe over dette og velge steder fritt. Velger dere å ta utgangspunkt i en av de foreslåtte rutene, krysses stoppene fra denne automatisk av. Alle de øvrige stedene vises fortsatt, slik at dere kan legge til eller fjerne stopp.</span></div>
-   <label for="gallery-route-start" class="sr-only">Velg en ferdig rute som utgangspunkt</label>
-   <select id="gallery-route-start" aria-label="Velg rute som utgangspunkt">
-    <option value="">Ingen ferdig rute – velg steder selv</option>
-    <option value="co">Rute 01 – The Colorado Explorer</option>
-    <option value="sw">Rute 02 – The Southwest Adventure</option>
-    <option value="no">Rute 03 – The Northern Wilderness</option>
-    <option value="lv">Rute 04 – The Vegas to Rockies Drive</option>
-    <option value="all">Rute 05 – The Grand Western Loop</option>
-    <option value="mr">Rute 06 – The Northern Icons Route</option>
-   </select>
+  <p class="subtext workshop-instructions">Velg reisemål fra bildene nedenfor og sett sammen deres egen rute. Trykk på et bilde for å lese om stedet. Når dere er klare, velger dere flyplasser.</p>
+  <div class="selection-panel" aria-label="Velg reisemål">
+   <div class="route-start-panel">
+    <div class="route-start-copy"><strong>Ta utgangspunkt i en ferdig rute (valgfritt)</strong><span>Dere kan hoppe over dette og velge steder fritt. Velger dere å ta utgangspunkt i en av de seks foreslåtte rutealternativene, krysses stoppene fra den ruten automatisk av. Alle de øvrige stedene vises fortsatt, slik at dere kan legge til eller fjerne stopp.</span></div>
+    <label for="gallery-route-start" class="sr-only">Velg en ferdig rute som utgangspunkt</label>
+    <select id="gallery-route-start" aria-label="Velg rute som utgangspunkt">
+     <option value="">Ingen ferdig rute – velg steder selv</option>
+     <option value="co">Rute 01 – The Colorado Explorer</option>
+     <option value="sw">Rute 02 – The Southwest Adventure</option>
+     <option value="no">Rute 03 – The Northern Wilderness</option>
+     <option value="lv">Rute 04 – The Vegas to Rockies Drive</option>
+     <option value="all">Rute 05 – The Grand Western Loop</option>
+     <option value="mr">Rute 06 – The Northern Icons Route</option>
+    </select>
+   </div>
+   <div class="selection-panel-actions">
+    <div class="workshop-tools">
+     <span class="workshop-counter" id="intro-selection-count" aria-live="polite">0 valgte reisemål</span>
+     <button type="button" class="btn btn-light" id="clear-gallery-selection">↺ Nullstill valg</button>
+    </div>
+   </div>
+   <div id="gallery-route-start-notice" class="route-start-notice sr-only" aria-live="polite"></div>
+   <div class="gallery-count sr-only" id="gallery-count" aria-live="polite"></div>
   </div>
-  <div id="gallery-route-start-notice" class="route-start-notice" aria-live="polite"></div>
-  <div class="workshop-tools">
-   <span class="workshop-counter" id="intro-selection-count" aria-live="polite">0 valgte reisemål</span>
-   <button type="button" class="btn btn-light" id="clear-gallery-selection">↺ Nullstill valg</button>
-  </div>
-  <div class="gallery-count" id="gallery-count" aria-live="polite"></div>
-  <p class="gallery-geography"><b>Utenfor hovedrunden:</b> Kansas City ligger rundt 8½–9 timers kjøring øst for Denver. Lake Tahoe og Virginia City ligger rundt 8–9 timers kjøring vest for Salt Lake City. Alle tre kan tas med i en egendefinert rute, men vil innebære betydelige omveier på kortere turer.</p>
   <div class="places-gallery" id="places-gallery"></div>
+  <p class="gallery-geography"><b>Utenfor hovedrunden:</b> Kansas City ligger rundt 8½–9 timers kjøring øst for Denver. Lake Tahoe og Virginia City ligger rundt 8–9 timers kjøring vest for Salt Lake City. Alle tre kan tas med i en egendefinert rute, men vil innebære betydelige omveier på kortere turer.</p>
   <div class="workshop-finish" id="bygg-verktoy">
    <div class="workshop-finish-top">
     <div class="build-top workshop-airports">
