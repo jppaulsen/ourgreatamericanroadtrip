@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10222c">
-<meta name="description" content="Interaktiv reiseplanlegger for tre reisekamerater på 14 dagers roadtrip i USA.">
+<meta name="description" content="Interaktiv reiseplanlegger for tre reisekamerater med fleksibel reiselengde og ulike ruter i USA.">
 <title>THE GREAT AMERICAN ROADTRIP — Reisekart og ruter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,6 +89,12 @@
 .gallery-check input{width:18px;height:18px;accent-color:#266f59;cursor:pointer}
 .gallery-checked{border:2px solid #267962!important;box-shadow:0 10px 28px #227a6330!important}
 .gallery-checked .gallery-check{background:#dcefe4;color:#174e3f}
+/* Etter valg av mal vises fremdeles ALLE steder, med malens steder først. */
+.gallery-section-label{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin:17px 0 3px;padding:13px 15px;background:#e8f1e9;border:1px solid #d0e0d3;border-radius:13px;color:#1d5043;font-size:14px;font-weight:800}
+.gallery-section-label.other{background:#f0f1ec;border-color:#e0e2d9;color:#4a635c;margin-top:28px}
+.gallery-section-label small{font-size:12px;font-weight:500;color:#61766f}
+.gallery-checked .gallery-check span{font-weight:900}
+
 .gallery-geography{margin:8px 0 17px;color:#6b614f;font-size:12px;line-height:1.65;max-width:950px;background:#fff8ed;border:1px solid #eddfc8;border-radius:12px;padding:12px 15px}
 .selected-stop-tags{display:flex;flex-wrap:wrap;gap:9px;max-height:220px;overflow:auto}
 .picked-chip{background:#e8f3eb;color:#245d4f;border:1px solid #b9d7c6;padding:8px 10px;border-radius:100px;font-weight:800;font-size:12px}
@@ -118,6 +124,32 @@
 .active-custom-share[hidden]{display:none!important}
 .active-custom-share .btn{padding:10px 15px}
 @media(max-width:650px){.active-custom-share{padding:14px 18px}.active-custom-share .btn{width:100%}}
+
+/* Tydelig alternativ til fast dagsfordeling */
+.route-view-switch{display:flex;gap:5px;background:#edf2ef;padding:5px;border-radius:13px;margin:12px 0 17px;border:1px solid #dce7df}
+.route-view-button{flex:1;border:0;border-radius:9px;background:transparent;color:#49645e;padding:11px 9px;font-size:13px;font-weight:800;white-space:nowrap}
+.route-view-button:hover{background:#ffffffa6}
+.route-view-button.active{background:#fff;color:#163d39;box-shadow:0 3px 12px rgba(27,66,60,.10)}
+#day-view[hidden],#km-view[hidden]{display:none!important}
+.km-summary{background:#e5f0ec;border:1px solid #c8ddd5;border-radius:15px;padding:19px;margin-bottom:12px}
+.km-summary .km-total{font:800 clamp(24px,3vw,33px) / 1.1 var(--head);color:#174840;letter-spacing:-.03em}
+.km-summary .km-count{margin-top:6px;color:#385a52;font-size:12px;font-weight:700}
+.km-summary .km-caption{margin-top:9px;font-size:12px;line-height:1.6;color:#4d6860}
+.km-summary .km-progress{margin-top:12px;font-weight:800;color:#287369;font-size:12px}
+.km-legs{display:flex;flex-direction:column;gap:8px}
+.km-route-head{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#5e706c;padding:8px 6px}
+.km-leg{display:flex;gap:11px;align-items:center;justify-content:space-between;min-height:72px;padding:12px 13px;background:#fff;border:1px solid #e5e8df;border-radius:13px;text-align:left;width:100%;transition:background .18s,border-color .18s}
+.km-leg:hover{background:#f6faf8;border-color:#c1d7ce}
+.km-leg .km-route-label{display:flex;flex-direction:column;gap:5px;min-width:0}
+.km-leg .km-route-label strong{color:var(--ink);font-size:14px;line-height:1.25}
+.km-leg .km-route-label small{color:var(--muted);font-size:11px;line-height:1.3}
+.km-leg .km-value{font-weight:900;color:#24675d;white-space:nowrap;font-size:16px;font-variant-numeric:tabular-nums}
+.km-leg .km-value.is-loading,.km-leg .km-value.is-missing{color:#84918b;font-size:12px;font-weight:700}
+.km-footer{padding:14px 3px 8px;color:#5a6a65;font-size:12px;line-height:1.6}
+.km-footer .km-retry{margin-top:8px;border:1px solid #b3d1c6;border-radius:9px;background:white;color:#1f6c62;padding:9px 12px;font-size:12px;font-weight:800}
+.km-footer .km-retry:hover{background:#e9f5ef}
+.km-footer a{color:#17685d;font-weight:700;text-decoration:underline}
+@media(max-width:600px){.route-view-button{font-size:12px}.km-leg{min-height:67px}.km-value{font-size:14px}}
 </style>
 <style>
 .custom-intro{padding:68px 0 18px;background:#f1efe7}.custom-intro h2{font-family:var(--head);font-size:clamp(31px,4vw,46px);letter-spacing:-.04em;margin:8px 0 13px}.custom-intro .subtext{max-width:850px}.intro-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:20px 0 2px}.intro-actions span{font-size:13px;color:#44645d;font-weight:800}.section-tight#steder{padding-top:30px}.section.custom-section{padding-top:25px}.day-details{display:none!important}.inline-stop{margin:0 2px 12px;border:1px solid #c6d9cf;background:#fff;border-radius:0 0 16px 16px;overflow:hidden;animation:revealPlace .18s ease-out}.inline-stop-photo{height:205px;background-size:cover;background-position:center;position:relative;overflow:hidden;background-color:#54736f}.inline-stop-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block}.inline-photo-credit{position:absolute;bottom:10px;right:10px;background:#132c32df;color:#fff!important;font-size:11px;padding:7px 10px;text-decoration:none;border-radius:7px;z-index:1}.inline-stop-content{padding:20px 18px 22px}.inline-stop-content h5{font-family:var(--head);font-size:25px;letter-spacing:-.035em;margin:0 0 9px;line-height:1.2}.inline-stop-content p{color:#586965;font-size:13px;line-height:1.68;margin:8px 0 12px}.inline-highlights{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.inline-highlights span{border-radius:20px;background:#eaf1ea;font-size:11px;font-weight:700;color:#336056;padding:6px 9px}.inline-stop-content .inline-tip{background:#fff4e8;color:#77533e;padding:12px;border-radius:10px}.inline-stop-content .inline-trip{background:#f2f4ee;padding:12px;border-radius:10px}.inline-map-link{display:inline-block;background:#143138;color:#fff;text-decoration:none;border-radius:9px;padding:10px 12px;font-size:12px;font-weight:800}.day-stop[aria-expanded="true"]{border-radius:14px 14px 0 0;border-color:#2e796d}.hero-meta{display:none}.custom-intro + #steder{scroll-margin-top:90px}@keyframes revealPlace{from{opacity:.4;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}@media(max-width:650px){.inline-stop-photo{height:180px}.inline-stop-content{padding:15px}.custom-intro{padding-top:45px}}
@@ -130,7 +162,8 @@
 .trip-workshop .workshop-instructions{max-width:820px;margin:0 0 19px}
 .workshop-tools{display:flex;align-items:center;gap:15px;flex-wrap:wrap;margin:19px 0 19px}
 .workshop-counter{font-weight:900;font-size:13px;color:#246858;background:#e3efe9;border:1px solid #d4e3db;border-radius:40px;padding:12px 16px}
-.trip-workshop .gallery-filters{margin:12px 0}
+ .trip-workshop .gallery-filters{margin:8px 0 12px}
+ .gallery-preset-hint{color:#506d64;font-size:12px;line-height:1.55;margin:17px 0 4px}
 .trip-workshop .gallery-count{margin:0 0 14px}
 .trip-workshop .places-gallery{margin-top:22px}
 .workshop-finish{scroll-margin-top:100px;margin-top:29px;background:#fff;border:1px solid #d9dfd7;border-radius:22px;padding:24px 26px;box-shadow:var(--shadow)}
@@ -178,25 +211,89 @@
 /* Hold rutens overskrift synlig under den faste toppmenyen etter generering. */
 #ruter .plan-top{scroll-margin-top:88px}
 </style>
+<style>
+/* Valgfri tidsramme. Uten å endre rutekart, stopp-ID-er eller kilometerberegning. */
+.trip-duration{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 23px;background:#fff;border:1px solid #dee6df;border-radius:20px;padding:22px 24px;margin:10px 0 27px;box-shadow:var(--shadow)}
+.trip-duration-lead{flex:1 1 235px}.trip-duration-lead h3{font-family:var(--head);font-size:22px;letter-spacing:-.025em;margin:0 0 5px}.trip-duration-lead p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+.trip-duration-field{display:flex;flex-direction:column;gap:7px;min-width:140px}.trip-duration-field label{color:#49645c;font-size:11px;letter-spacing:.05em;font-weight:800}
+.trip-duration-field input,.trip-duration-field select{border-radius:12px;border:1px solid #cfddd2;background:#f8faf7;min-height:45px;color:#1b3636;font-size:14px;font-weight:750;padding:10px 12px}
+.trip-duration-field input{width:115px}.trip-duration-field select{max-width:225px}
+.trip-duration-result{flex:1 1 100%;font-size:13px;color:#315d54;line-height:1.7;padding:12px 14px;border-radius:12px;background:#ecf3ed;border:1px solid #d3e5d7}
+.trip-duration-result strong{color:#183d38}.duration-feedback{font-size:12px;line-height:1.6;margin:0;padding:12px 14px;border-radius:12px;background:#f4f5ee;color:#385750;border:1px solid #e1e5db}.duration-feedback.warning{background:#fff4e8;border-color:#ecd6bb;color:#805333}
+#map-external-links{scroll-margin-top:105px}
+@media(max-width:650px){.trip-duration{padding:17px;gap:14px}.trip-duration-field{min-width:0;flex:1 1 130px}.trip-duration-field input{width:100%}.trip-duration-field select{width:100%;max-width:none}#map-external-links{scroll-margin-top:82px}}
+</style>
+<style>
+/* Velg utgangspunkt direkte før bildeavkryssingen */
+.route-start-panel{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border:1px solid #dbe5dc;border-radius:17px;padding:18px 20px;margin:22px 0 8px;box-shadow:0 8px 28px rgba(21,45,49,.045)}
+.route-start-copy{display:flex;flex-direction:column;gap:6px;max-width:620px}
+.route-start-copy strong{font:800 17px var(--head);color:#193f38}
+.route-start-copy span{font-size:13px;color:#647772;line-height:1.55}
+.route-start-panel select{min-width:255px;max-width:100%;padding:12px 36px 12px 13px;background:#f4f8f5;border:1px solid #c8d8cf;border-radius:11px;color:#23473f;font-size:13px;font-weight:800;cursor:pointer}
+.route-start-notice{font-size:12px;color:#326352;font-weight:700;min-height:0;line-height:1.6}
+.route-start-notice:not(:empty){margin:5px 0 13px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Kartkolonnen styrer høyden på den rullbare listen på stor skjerm */
+@media(min-width:941px){.day-column{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}}
+@media(max-width:940px){.day-column{max-height:none!important}}
+@media(max-width:680px){.route-start-panel{flex-direction:column;align-items:stretch;gap:13px;padding:16px}.route-start-panel select{width:100%;min-width:0}}
+</style>
 </head>
 <body>
 <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="#top"><span class="brandmark">✦</span><span>USA ROADTRIP <span style="color:#f4ba7e">/ 2027</span></span></a><nav class="topnav"><a href="#ruter">Rutealternativer</a><a href="#bygg">Lag egen rute</a><a href="#sammenlign">Sammenlign</a></nav></div></header>
 <main id="top">
 <section class="hero"><div class="hero-photo"></div><div class="wrap hero-content"><h1>THE GREAT<br><em>AMERICAN</em><br>ROADTRIP.</h1><p class="hero-lead">Tre reisekamerater. Fjell, ørken og endeløse veier. Utforsk seks forskjellige måter å oppleve det amerikanske vesten på — eller skreddersy deres egen tur.</p><div class="hero-ctas"><a class="btn btn-primary" href="#ruter">Utforsk reiserutene <span>↗</span></a><a class="btn btn-ghost" href="#bygg">Lag deres egen rute ↓</a></div></div></section>
 
-<section class="section" id="ruter"><div class="wrap"><div class="section-head"><div><div class="section-kicker">VELG DITT EVENTYR</div><h2>Seks ferdige ruter – og deres egen</h2><p class="subtext">Bytt mellom seks ruter – inkludert Las Vegas, Southwest + Yellowstone og Mount Rushmore. Kartet, høydepunktene og alle 14 dagene endrer seg. Alle er <b>forslag</b> — vi har ennå ikke bestemt flybilletter eller bekreftet kjøre- og åpningstider for 2027.</p></div></div><div class="route-grid" id="route-cards"></div><div id="route-welcome" class="route-welcome">Velg en av de seks rutene over for å se kart, stoppesteder og dagsplan.</div><div class="plan-shell" hidden><div class="plan-top"><div><div class="section-kicker" id="selected-route-kicker">VELG RUTE</div><h3 id="selected-route-title">Velg en reiserute</h3><div class="plan-lead" id="selected-route-lead"></div></div><span class="flag" id="route-flag"></span></div><div id="active-custom-share" class="active-custom-share" hidden></div><div class="plan-stats" id="selected-stats"></div><div class="planner-content"><div class="map-column"><div class="map-top"><div class="mini-heading">🗺 Rutekart</div><div class="map-note">Trykk på en prikk eller et stedsnavn for bilde og info</div></div><div class="map-viewport"><div class="map-frame-title">Skjematisk kart · ikke navigasjon</div><svg id="route-map" class="map-svg" viewBox="0 0 920 650" role="img" aria-label="Kart over reiseruten med klikkbare stopp"></svg></div><div class="map-hint">Trykk på stedsnavnene eller prikkene i kartet for å åpne bilder og stedskort. Kartlinjene er skjematiske og følger ikke veiene.</div><div class="map-stop-buttons" id="map-stop-buttons" aria-label="Åpne informasjon om stedene langs ruten"></div><div id="map-external-links" class="map-external-links" aria-label="Google Maps-etapper for reiseruten"></div></div><div class="day-column"><h4>Dag for dag</h4><div class="days-intro">Dag 1 er normalt ankomst i USA, dag 13 hjemreise fra USA og dag 14 ankomst i Norge. Velg en dag for detaljer.</div><div class="days-list" id="days-list"></div><div id="day-details" class="day-details"></div></div></div></div></div></section>
+<section class="section" id="ruter"><div class="wrap"><div class="section-head"><div><div class="section-kicker">VELG DITT EVENTYR</div><h2>Seks ferdige ruter – og deres egen</h2><p class="subtext">Bytt mellom seks ruter – eller lag deres egen. Kartet, høydepunktene og dagforslagene endrer seg.</p></div></div><div class="trip-duration" id="trip-duration" aria-label="Velg hvor lenge dere vil reise">
+  <div class="trip-duration-lead"><h3>Hvor lenge vil dere være borte?</h3><p>De seks ferdige rutene er planlagt med utgangspunkt i <strong>14 dager totalt, inkludert flyreisene</strong>. Velger dere flere dager, foreslår nettsiden ekstra opplevelses- eller hviledager. Velger dere færre, får dere beskjed om at planen må kortes ned. Stopp fjernes ikke automatisk, og kartet og kilometeroversikten beholdes. Planleggeren setter av to reisedager: én til utreise og ankomst USA, og én til avreise fra USA. Hjemkomst i Norge kan skje dagen etter, avhengig av flyruten, men telles ikke som en egen dag her.</p></div>
+  <div class="trip-duration-field"><label for="trip-days">Antall dager</label><input id="trip-days" type="number" min="7" max="24" step="1" value="14" inputmode="numeric"></div>
+  <div class="trip-duration-field"><label for="trip-mode">Hvordan telles dagene?</label><select id="trip-mode"><option value="total">Inkludert reisedager</option><option value="usa">Hele dager i USA + reise</option></select></div>
+  <div class="trip-duration-result" id="trip-duration-result" aria-live="polite"></div>
+ </div><div class="route-grid" id="route-cards"></div><div id="route-welcome" class="route-welcome">Velg en av de seks rutene over for å se kart, stoppesteder og dagsplan.</div><div class="plan-shell" hidden><div class="plan-top"><div><div class="section-kicker" id="selected-route-kicker">VELG RUTE</div><h3 id="selected-route-title">Velg en reiserute</h3><div class="plan-lead" id="selected-route-lead"></div></div><span class="flag" id="route-flag"></span></div><div id="active-custom-share" class="active-custom-share" hidden></div><div class="plan-stats" id="selected-stats"></div><div class="planner-content"><div class="map-column"><div class="map-top"><div class="mini-heading">🗺 Rutekart</div><div class="map-note">Trykk på en prikk eller et stedsnavn for bilde og info</div></div><div class="map-viewport"><div class="map-frame-title">Skjematisk kart · ikke navigasjon</div><svg id="route-map" class="map-svg" viewBox="0 0 920 650" role="img" aria-label="Kart over reiseruten med klikkbare stopp"></svg></div><div class="map-hint">Trykk på stedsnavnene eller prikkene i kartet for å åpne bilder og stedskort. Kartlinjene er skjematiske og følger ikke veiene.</div><div class="map-stop-buttons" id="map-stop-buttons" aria-label="Åpne informasjon om stedene langs ruten"></div><div id="map-external-links" class="map-external-links" aria-label="Google Maps-etapper for reiseruten"></div></div><div class="day-column">
+    <h4 id="itinerary-panel-title">Utforsk stoppene</h4>
+    <div class="route-view-switch" role="group" aria-label="Velg visning av reiseruten">
+      <button class="route-view-button active" type="button" data-route-view="days" aria-pressed="true">Dag for dag</button>
+      <button class="route-view-button" type="button" data-route-view="km" aria-pressed="false">Etapper og km</button>
+    </div>
+    <div id="day-view">
+      <div class="days-intro" id="day-view-intro">Eksempel med to flyreisedager: dag 1 ankomst USA og dag 14 avreise fra USA. Velg et stopp for detaljer.</div>
+      <div id="duration-day-feedback" class="duration-feedback" aria-live="polite"></div>
+      <div class="days-list" id="days-list"></div>
+      <div class="day-details" id="day-details"></div>
+    </div>
+    <div id="km-view" hidden aria-live="polite">
+      <div class="km-summary" id="km-summary"></div>
+      <div class="km-legs" id="km-legs"></div>
+      <div class="km-footer" id="km-footer"></div>
+    </div>
+   </div></div></div></div></section>
 <section class="section trip-workshop" id="bygg">
  <div class="wrap">
   <div class="section-kicker">VELG STEDER · BYGG RUTEN</div>
   <h2 id="steder">Dette kan dere oppleve</h2>
   <p class="subtext workshop-instructions">Kryss av stedene dere har lyst til å besøke på bildene. Velg deretter hvor dere vil fly til og hjem fra, og lag et personlig ruteforslag under galleriet. Trykk på et bilde for å lese om stedet.</p>
+  <div class="route-start-panel">
+   <div class="route-start-copy"><strong>Ta utgangspunkt i en ferdig rute</strong><span>Velg for eksempel rute 02. Stedene krysses automatisk av under, og dere kan legge til eller fjerne stopp som dere ønsker.</span></div>
+   <label for="gallery-route-start" class="sr-only">Velg en ferdig rute som utgangspunkt</label>
+   <select id="gallery-route-start" aria-label="Velg rute som utgangspunkt">
+    <option value="">Velg rute 01–06 …</option>
+    <option value="co">Rute 01 – The Colorado Explorer</option>
+    <option value="sw">Rute 02 – The Southwest Adventure</option>
+    <option value="no">Rute 03 – The Northern Wilderness</option>
+    <option value="lv">Rute 04 – The Vegas to Rockies Drive</option>
+    <option value="all">Rute 05 – The Grand Western Loop</option>
+    <option value="mr">Rute 06 – The Northern Icons Route</option>
+   </select>
+  </div>
+  <div id="gallery-route-start-notice" class="route-start-notice" aria-live="polite"></div>
   <div class="workshop-tools">
    <span class="workshop-counter" id="intro-selection-count" aria-live="polite">0 valgte reisemål</span>
    <button type="button" class="btn btn-light" id="clear-gallery-selection">↺ Nullstill valg</button>
   </div>
-  <div class="gallery-filters" id="gallery-filters" aria-label="Filtrer reisemål etter reiserute"></div>
+  <p class="gallery-preset-hint">Hurtigvalg: Trykk på en rute for å krysse av stedene fra den. <strong>Alle reisemålene forblir synlige</strong>, slik at dere kan legge til og fjerne fritt.</p>
+  <div class="gallery-filters" id="gallery-filters" aria-label="Velg ferdig rute som utgangspunkt for avkryssing"></div>
   <div class="gallery-count" id="gallery-count" aria-live="polite"></div>
-  <p class="gallery-geography"><b>Utenfor hovedrunden:</b> Kansas City er rundt 8½–9 timers kjøring øst for Denver. Lake Tahoe er rundt 8½ timer vest for Salt Lake City. De kan velges for sammenligning, men er store omveier på 14 dager. Virginia City i Nevada er med som et valgbart reisemål og kan kombineres med Lake Tahoe.</p>
+  <p class="gallery-geography"><b>Utenfor hovedrunden:</b> Kansas City er rundt 8½–9 timers kjøring øst for Denver. Lake Tahoe er rundt 8½ timer vest for Salt Lake City. De kan velges for sammenligning, men gir store omveier på kortere turer. Virginia City i Nevada er med som et valgbart reisemål og kan kombineres med Lake Tahoe.</p>
   <div class="places-gallery" id="places-gallery"></div>
   <div class="workshop-finish" id="bygg-verktoy">
    <div class="workshop-finish-top">
@@ -229,18 +326,18 @@
   </div>
  </div>
 </section>
-<section class="section" id="sammenlign"><div class="wrap"><div class="section-kicker">SAMMENLIGN RUTENE</div><h2>Hvilken tur passer best?</h2><p class="subtext">Seks ferdige rutealternativer innen den samme tidsrammen. Dere kan i tillegg bygge deres egen ovenfor. Vi legger vekt på gjennomførbarhet og ro — ikke å presse inn flest mulig severdigheter.</p><div class="compare" id="compare-grid"></div><div style="font-size:12px;color:#5d716b;line-height:1.65;margin-top:22px"><b>Viktig:</b> Kjøretidene er ikke verifisert med live navigasjon. Tall og varigheter må kontrolleres for valgte datoer og veier før dere bestiller. Enveisleie og flypris er ikke beregnet.</div></div></section>
-<div class="wrap" style="padding:22px 0 0"><div class="choice-alert" style="background:#fdf2e5;color:#704527;border:1px solid #edd6b9"><b>Viktig om reisedagene:</b> Planene forutsetter normalt ankomst USA dag 1, avreise fra USA dag 13 og ankomst Norge dag 14. Hvis flyforbindelsene krever flere reisedager, må en opplevelsesdag kuttes. Kjøreestimatene er grove og må sjekkes i et faktisk kart før bestilling. Las Vegas- og Yellowstone-kombinasjonen har særlig lite slingringsmonn. Rushmore-ruten har også to lengre transportdager og forutsetter at fly fra Salt Lake City passer 14-dagersrammen.</div></div><section class="resources-section"><div class="wrap"><div class="section-kicker">Sjekk før dere bestiller</div><h2>Praktiske forhold før reisen</h2><div class="resources-grid"><div class="resource-card"><h3>Fjellpass & reservasjoner</h3><ul><li><b>Trail Ridge Road:</b> væravhengig i starten av sommersesongen. Følg NPS for veistatus og parkens eventuelle tidsbestilte innkjøring.</li><li><b>Bear Lake Corridor:</b> egen reservasjonstype har vært brukt i Rocky Mountain National Park.</li><li><b>Maroon Bells:</b> parkering eller shuttlebuss krever normalt reservasjon i høysesong.</li><li><b>Zion–Mount Carmel Highway:</b> størrelsebegrensninger for store kjøretøy. Ordinær personbil er enklest.</li></ul><p><a href="https://www.nps.gov/romo/planyourvisit/timed-entry-permit-system.htm" target="_blank" rel="noopener">Rocky Mountain NP ↗</a> &nbsp; · &nbsp; <a href="https://www.visitmaroonbells.com/" target="_blank" rel="noopener">Maroon Bells ↗</a> &nbsp; · &nbsp; <a href="https://www.nps.gov/zion/planyourvisit/large-vehicles.htm" target="_blank" rel="noopener">Zion ↗</a></p></div><div class="resource-card"><h3>Veier, leiebil & tempo</h3><ul><li><b>Coppermine Road ved Page:</b> grus/varierende underlag. Undersøk tilstand og leiebilvilkår før dere eventuelt kjører dit. Ikke planlegg den som en vanlig asfaltert utflukt.</li><li><b>Potash Road:</b> stopp og kjøring langs asfaltert del kan være fint; mer krevende grusveier videre krever særskilt vurdering.</li><li><b>Enveisleie:</b> sammenlign totalpris Phoenix → Denver, Denver tur/retur og Denver → Salt Lake City.</li><li><b>Kjørefri tid:</b> opplevelser, matpauser, parkering og bilkø kommer i tillegg til rene kjøretider.</li></ul><p><a href="https://www.nps.gov/yell/planyourvisit/parkroads.htm" target="_blank" rel="noopener">Yellowstone veier ↗</a> &nbsp; · &nbsp; <a href="https://www.nps.gov/romo/planyourvisit/road_status.htm" target="_blank" rel="noopener">Rocky Mountain veistatus ↗</a></p></div></div><p style="font-size:11px;color:#6b7a75;margin-top:18px">Basert på publiserte regler og informasjon tilgjengelig høsten 2026. Regler, åpningstider, priser og tilgjengelighet for 2027 må kontrolleres på nytt.</p></div></section>
+<section class="section" id="sammenlign"><div class="wrap"><div class="section-kicker">SAMMENLIGN RUTENE</div><h2>Hvilken tur passer best?</h2><p class="subtext">Seks ferdige rutealternativer som dere kan vurdere opp mot valgt tidsramme. Dere kan i tillegg bygge deres egen ovenfor. Vi legger vekt på gjennomførbarhet og ro — ikke å presse inn flest mulig severdigheter.</p><div class="compare" id="compare-grid"></div><div style="font-size:12px;color:#5d716b;line-height:1.65;margin-top:22px"><b>Viktig:</b> Kjøretidene er ikke verifisert med live navigasjon. Tall og varigheter må kontrolleres for valgte datoer og veier før dere bestiller. Enveisleie og flypris er ikke beregnet.</div></div></section>
+<div class="wrap" style="padding:22px 0 0"><div class="choice-alert" id="trip-global-warning" style="background:#fdf2e5;color:#704527;border:1px solid #edd6b9"></div></div><section class="resources-section"><div class="wrap"><div class="section-kicker">Sjekk før dere bestiller</div><h2>Praktiske forhold før reisen</h2><div class="resources-grid"><div class="resource-card"><h3>Fjellpass & reservasjoner</h3><ul><li><b>Trail Ridge Road:</b> væravhengig i starten av sommersesongen. Følg NPS for veistatus og parkens eventuelle tidsbestilte innkjøring.</li><li><b>Bear Lake Corridor:</b> egen reservasjonstype har vært brukt i Rocky Mountain National Park.</li><li><b>Maroon Bells:</b> parkering eller shuttlebuss krever normalt reservasjon i høysesong.</li><li><b>Zion–Mount Carmel Highway:</b> størrelsebegrensninger for store kjøretøy. Ordinær personbil er enklest.</li></ul><p><a href="https://www.nps.gov/romo/planyourvisit/timed-entry-permit-system.htm" target="_blank" rel="noopener">Rocky Mountain NP ↗</a> &nbsp; · &nbsp; <a href="https://www.visitmaroonbells.com/" target="_blank" rel="noopener">Maroon Bells ↗</a> &nbsp; · &nbsp; <a href="https://www.nps.gov/zion/planyourvisit/large-vehicles.htm" target="_blank" rel="noopener">Zion ↗</a></p></div><div class="resource-card"><h3>Veier, leiebil & tempo</h3><ul><li><b>Coppermine Road ved Page:</b> grus/varierende underlag. Undersøk tilstand og leiebilvilkår før dere eventuelt kjører dit. Ikke planlegg den som en vanlig asfaltert utflukt.</li><li><b>Potash Road:</b> stopp og kjøring langs asfaltert del kan være fint; mer krevende grusveier videre krever særskilt vurdering.</li><li><b>Enveisleie:</b> sammenlign totalpris Phoenix → Denver, Denver tur/retur og Denver → Salt Lake City.</li><li><b>Kjørefri tid:</b> opplevelser, matpauser, parkering og bilkø kommer i tillegg til rene kjøretider.</li></ul><p><a href="https://www.nps.gov/yell/planyourvisit/parkroads.htm" target="_blank" rel="noopener">Yellowstone veier ↗</a> &nbsp; · &nbsp; <a href="https://www.nps.gov/romo/planyourvisit/road_status.htm" target="_blank" rel="noopener">Rocky Mountain veistatus ↗</a></p></div></div><p style="font-size:11px;color:#6b7a75;margin-top:18px">Basert på publiserte regler og informasjon tilgjengelig høsten 2026. Regler, åpningstider, priser og tilgjengelighet for 2027 må kontrolleres på nytt.</p></div></section>
 </main><footer class="footer"><div class="wrap footer-inner"><div><b>USA ROADTRIP 2027</b> · En interaktiv skisse for far, bror og sønn.</div><div>Opprettet oktober 2026 · Ingen bestillinger er gjort · Ikke et navigasjonsverktøy</div></div></footer>
 <div class="toast" id="toast" role="status"></div>
 <dialog id="stop-dialog" class="stop-dialog" aria-labelledby="stop-dialog-title"><div class="stop-dialog-content" id="stop-dialog-content"></div></dialog>
 <script>
 (function(){'use strict';
-const $=(id)=>document.getElementById(id);const stkey='usaRoadtrip27_v4';const defaults={route:'',routeChosen:false,date:'late',airport:'open',pace:'balanced',zion:false,vegas:false,yellowstone:false,favorites:[],filter:'all',note:'',selectedDay:0,selectedStop:null,customKeys:[],customFrom:'',customTo:'',customOrder:[],lastPresetRoute:''};let stored={};try{
+const $=(id)=>document.getElementById(id);const stkey='usaRoadtrip27_v4';const defaults={route:'',routeChosen:false,date:'late',airport:'open',pace:'balanced',zion:false,vegas:false,yellowstone:false,favorites:[],filter:'all',note:'',selectedDay:0,selectedStop:null,customKeys:[],customFrom:'',customTo:'',customOrder:[],customBaseRoute:'',lastPresetRoute:'',tripDays:14,tripMode:'total'};let stored={};try{
  const saved=localStorage.getItem(stkey);
  if(saved){stored=JSON.parse(saved)||{}}
  else {const older=JSON.parse(localStorage.getItem('usaRoadtrip27_v3')||'{}');stored={...older,route:'',routeChosen:false,lastPresetRoute:'',selectedDay:0,selectedStop:null,customOrder:[]}}
-}catch(e){}const state={...defaults,...stored};if(!state.routeChosen || !['co','sw','no','lv','all','mr','custom'].includes(state.route)){state.route='';state.routeChosen=false;}if(!Array.isArray(state.customKeys))state.customKeys=[];if(!Array.isArray(state.customOrder))state.customOrder=[];if(!state.routeChosen||!['co','sw','no','lv','all','mr'].includes(state.lastPresetRoute))state.lastPresetRoute='';if(state.route==='custom'&&!state.customOrder.length)state.route=state.lastPresetRoute;
+}catch(e){}const state={...defaults,...stored};if(!Number.isInteger(Number(state.tripDays))||Number(state.tripDays)<7||Number(state.tripDays)>24)state.tripDays=14;else state.tripDays=Number(state.tripDays);if(!['total','usa'].includes(state.tripMode))state.tripMode='total';if(!['days','km'].includes(state.routeView))state.routeView='days';if(!state.routeChosen || !['co','sw','no','lv','all','mr','custom'].includes(state.route)){state.route='';state.routeChosen=false;}if(!Array.isArray(state.customKeys))state.customKeys=[];if(!['co','sw','no','lv','all','mr'].includes(state.customBaseRoute))state.customBaseRoute='';if(!Array.isArray(state.customOrder))state.customOrder=[];if(!state.routeChosen||!['co','sw','no','lv','all','mr'].includes(state.lastPresetRoute))state.lastPresetRoute='';if(state.route==='custom'&&!state.customOrder.length)state.route=state.lastPresetRoute;
 function save(){try{localStorage.setItem(stkey,JSON.stringify(state))}catch(e){}}
 const loc={lv:['Las Vegas',36.17,-115.14],den:['Denver',39.739,-104.99],gold:['Golden',39.756,-105.222],cos:['Colorado Springs',38.834,-104.821],sand:['Great Sand Dunes',37.735,-105.512],pag:['Pagosa Springs',37.27,-107.01],dur:['Durango',37.275,-107.88],our:['Ouray',38.023,-107.672],tel:['Telluride',37.938,-107.812],asp:['Aspen',39.191,-106.817],vail:['Vail',39.64,-106.37],bre:['Breckenridge',39.48,-106.04],est:['Estes Park',40.377,-105.522],gran:['Grand Lake',40.252,-105.823],steam:['Steamboat Springs',40.485,-106.831],phx:['Phoenix',33.448,-112.074],sed:['Sedona',34.869,-111.76],page:['Page',36.914,-111.456],zion:['Zion',37.298,-112.999],moab:['Moab',38.574,-109.549],jack:['Jackson',43.48,-110.762],teton:['Grand Teton',43.79,-110.685],yell:['Yellowstone',44.46,-110.83],west:['West Yellowstone',44.662,-111.105],slc:['Salt Lake City',40.76,-111.89]};
 // Reisemål med egne identiteter: aldri slå sammen steder som er nær hverandre.
@@ -357,18 +454,18 @@ function customReady(){return !!(state.customKeys.length&&loc[state.customFrom]&
  function orderedCustom(){return customReady()?optimizeStops(state.customKeys,state.customFrom,state.customTo):[]}
 function customGrouping(order){ // Gruppér steder under ca. 45 km fra hverandre, men aldri mer enn tre per dag.
  const clusters=[];for(const k of order){const last=clusters.at(-1);if(last&&last.length<3&&airKm(last.at(-1),k)<55)last.push(k);else clusters.push([k])}
- // 11 dager i USA mellom ankomst dag 1 og hjemreise dag 13.
- while(clusters.length>11){let best=Infinity,at=0;for(let i=0;i<clusters.length-1;i++){const v=airKm(clusters[i].at(-1),clusters[i+1][0]);if(v<best){best=v;at=i}}clusters.splice(at,2,clusters[at].concat(clusters[at+1]));}return clusters;}
+ // Inntil tolv opplevelsesdager mellom ankomst dag 1 og avreise dag 14.
+ while(clusters.length>12){let best=Infinity,at=0;for(let i=0;i<clusters.length-1;i++){const v=airKm(clusters[i].at(-1),clusters[i+1][0]);if(v<best){best=v;at=i}}clusters.splice(at,2,clusters[at].concat(clusters[at+1]));}return clusters;}
 function makeCustomDays(){const keys=Array.isArray(state.customOrder)?state.customOrder:[];const from=state.customFrom,to=state.customTo;
  const out=[day('Ankomst '+loc[from][0],loc[from][0],'Fly fra Norge og hent leiebil','Hold ankomstdagen rolig. Start- og sluttflyplassene er valgene dere har gjort i ruteverkstedet.','Flyreise',loc[from][0],null,from)];
- const groups=customGrouping(keys),days=11;let prev=from;
+ const groups=customGrouping(keys),days=12;let prev=from;
  // Hver opplevelsesdag følger gruppenes geografiske rekkefølge. Gjenværende dager blir pusterom.
  for(let i=0;i<days;i++){
-   const stops=groups[i]||[];if(stops.length){const target=stops.at(-1), names=stops.map(routeChoiceLabel);const km=airKm(prev,target);out.push(day(names.length===1?names[0]:names.join(' + '),routeChoiceLabel(target),'Opplev '+names.join(', '),'Foreslått stopp i en geografisk sortert rute. Besøk '+names.join(', ')+'. Beregn faktisk kjørelengde og tid med et veikart. Behold tid til mat, fotostopp og uventede omveier.',km<35?'Kort geografisk etappe':'Luftlinje ca. '+Math.round(km)+' km · IKKE kjøretid',routeChoiceLabel(target),prev,target,{stops}));prev=target;
+   const stops=groups[i]||[];if(stops.length){const target=stops.at(-1), names=stops.map(routeChoiceLabel);out.push(day(names.length===1?names[0]:names.join(' + '),routeChoiceLabel(target),'Opplev '+names.join(', '),'Foreslått stopp i en geografisk sortert rute. Besøk '+names.join(', ')+'. Se «Etapper og km» for beregnet kjørelengde. Behold tid til mat, fotostopp og uventede omveier.','Se kjørelengde under «Etapper og km»',routeChoiceLabel(target),prev,target,{stops}));prev=target;
    }else{out.push(day('Ekstra dag / buffer',routeChoiceLabel(prev),'Tid til å nyte området','Denne dagen er med som fleksibel buffer. Bruk den til naturopplevelser, hvile eller for å dele opp en lang kjøredag.','Valgfritt',routeChoiceLabel(prev),prev,prev))}
  }
  out.push(day('Fly hjem fra '+loc[to][0],loc[to][0],'Returfly til Norge','Sjekk at siste overnatting ligger i passende avstand fra flyplassen. Geografisk flytt til sluttflyplass er IKKE medregnet i dagsplanen hvis den ikke ligger nær siste stopp.','Flyreise','På flyet',prev,to));
- out.push(day('Ankomst Norge','Norge','Hjemkomst','Vanlig antakelse om overnattsflyging. Sjekk faktiske rutetider.','Fly / ankomst','Hjemme',null,null));return out;
+ return out;
 }
 
 // 14 dager totalt, inkludert hjemkomst i Norge. Opprinnelige planutkast ga ikke plass til dag 14 hjemkomst.
@@ -408,8 +505,51 @@ for(const [key,arr] of Object.entries({co:colorado,sw:southwest,swz:southwestZio
  const stops=namedStops[key];if(arr.length!==stops.length)throw Error('Feil dagantall for '+key);
  for(let i=0;i<arr.length;i++)arr[i].stops=stops[i];
 }
-// Unngå at rute 02 ignorerer Zion hvis dette var valgt i en tidligere versjon.
-function getDays(){return state.route==='sw'&&state.zion?southwestZion:routes[state.route].days}
+// Modellen bruker to reisedager: ankomst USA og avreise USA. Faktisk hjemkomst
+// kan være neste kalenderdag, men denne er ikke med i planens dagantall.
+function tripTime(){
+ const n=Math.max(7,Math.min(24,Number(state.tripDays)||14));
+ const usa=state.tripMode==='usa';
+ return {input:n,mode:state.tripMode,totalDays:usa?n+2:n,fullDays:usa?n:Math.max(0,n-2),travelCalendarDays:2};
+}
+function tripDescription(){const t=tripTime();return t.mode==='usa'?`${t.input} hele dager i USA + 2 reisedager (${t.totalDays} dager totalt)`:`${t.totalDays} dager totalt inkl. fly (${t.fullDays} hele dager i USA + 2 reisedager)`;}
+function baseDays(){
+ const itinerary=state.route==='sw'&&state.zion?southwestZion:routes[state.route].days;
+ // De seks opprinnelige rutene hadde hjemkomst Norge som egen dag.
+ // Behold alle eksisterende opplevelsesdager, sett inn én fleksibel dag,
+ // og bruk dag 14 som avreise fra USA i stedet.
+ if(itinerary.length===14 && /(?:ankomst|hjemkomst).*norge/i.test(itinerary[13].title)){
+  const lastExperience=itinerary[11],flightHome=itinerary[12];
+  const key=lastExperience.to||lastExperience.from;
+  const place=key&&loc[key]?routeChoiceLabel(key):cleanPlaceName(lastExperience.place);
+  const extra=day('Fleksibel dag ved '+place,place,'Tid til et ekstra stopp eller en pause','Bruk dagen til en opplevelse dere ønsker mer tid til, eller som buffer før hjemreise. Dersom hjemreiseflyplassen er et stykke unna, bør dere bruke dagen til å komme nærmere den.','Valgfritt','Avhengig av valg',key,key,{stops:[]});
+  return [...itinerary.slice(0,12),extra,flightHome];
+ }
+ return itinerary;
+}
+function getDays(){
+ const original=baseDays(),t=tripTime(),more=Math.max(0,t.totalDays-original.length);
+ if(!more)return original; // Ved kortere tidsramme beholder vi den ærlige 14-dagersskissen og advarer.
+ // Valgfrie ekstra opplevelsesdager fordelt underveis. Ingen stopp tas bort eller flyttes.
+ const candidates=original.slice(1,-2).map((d,i)=>{
+  const k=d.to||d.from;
+  const priorities=['yell','teton','moab','our','zion','asp','est','tel','page','lv','rushmore','jack','sand'];
+  const rank=priorities.indexOf(k);
+  return {index:i+1,score:rank<0?0:priorities.length-rank,place:k};
+ }).sort((a,b)=>b.score-a.score||a.index-b.index);
+ const extraByIndex=new Map();
+ for(let j=0;j<more;j++){const c=candidates[j%candidates.length];extraByIndex.set(c.index,(extraByIndex.get(c.index)||0)+1);}
+ const result=[];
+ original.forEach((d,i)=>{
+  result.push(d);
+  const count=extraByIndex.get(i)||0;
+  for(let e=0;e<count;e++){
+   const key=d.to||d.from,place=key?routeChoiceLabel(key):cleanPlaceName(d.place);
+   result.push(day('Ekstra tid i '+place,place,'Valgfri opplevelsesdag','Denne dagen er en foreslått pause eller ekstra overnatting. Bruk den til flere opplevelser, eller flytt den til et annet sted når dere bestemmer dere.','Lokal kjøring / hvile',d.night,key,key,{stops:[]}));
+  }
+ });
+ return result;
+}
 function currentRoute(){return routes[state.route]};
 
 const wishes=[['Salt Lake City','Utah',['no','all']],['Las Vegas','Nevada',['lv','all']],['Page og Coppermine Road','Arizona',['sw','lv','all']],['Vail','Colorado',['co']],['Breckenridge','Colorado',['co','sw']],['Telluride','Colorado',['co','sw','lv','all']],['Ouray','Colorado',['co','sw','lv','all']],['Bear Creek Falls','Colorado',['co','sw','lv','all']],['Million Dollar Highway','Colorado',['co','sw','lv','all']],['Durango','Colorado',['co','sw','lv','all']],['Pagosa Springs','Colorado',['co','sw','lv']],['Great Sand Dunes NP','Colorado',['co','sw','lv']],['Garden of the Gods','Colorado',['co','sw','lv']],['Aspen','Colorado',['co']],['Rocky Mountain NP','Colorado',['co','sw','no','lv']],['Georgetown','Colorado',['co']],['West Elk Loop','Colorado',[]],['Maroon Bells','Colorado',['co']],['Frisco','Colorado',['co','sw']],['Guanella Pass','Colorado',[]],['Golden','Colorado',['co']],['Trail Ridge Road','Colorado',['co','sw','no']],['Bear Lake Corridor','Colorado',['co','sw','no']],['Alluvial Fan','Colorado',['co','sw']],['Estes Park','Colorado',['co','sw','no','lv']],['Potash Road (Moab)','Utah',['sw','lv','all']],['Cathedral Rock (Sedona)','Arizona',['sw']],['Zion–Mount Carmel Highway','Utah',['lv','all']],['Yellowstone NP','Wyoming',['no','all']],['Grand Teton NP','Wyoming',['no','all']]];
@@ -419,7 +559,7 @@ function escapeHTML(s){return String(s).replace(/[&<>"']/g,x=>({'&':'&amp;','<':
 const art={'04':'https://images.unsplash.com/photo-1674501342032-16f702ac272b?auto=format&fit=crop&w=800&q=60','05':'https://images.unsplash.com/photo-1607550295261-851fa60d8ed2?auto=format&fit=crop&w=800&q=60','01':'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzAwIDgwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJza3kiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzI3NGM2NCIvPjxzdG9wIG9mZnNldD0iLjY1IiBzdG9wLWNvbG9yPSIjNzlhOGFkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZjZjYTkwIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9Imxha2UiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzU0N2U4MiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzE0M2E0NSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMzAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0idXJsKCNza3kpIi8+PGNpcmNsZSBjeD0iOTU1IiBjeT0iMTkwIiByPSI3NSIgZmlsbD0iI2ZiZDRhMCIgb3BhY2l0eT0iLjc1Ii8+PHBhdGggZD0iTTAgNTM1IDE4NSAyOTUgMzEwIDQyMCA0ODAgMTg1IDY1MCA0MzUgNzk1IDIzNSA5MzUgMzY1IDEwNTAgMjQ1IDEzMDAgNTEwVjgwMEgwWiIgZmlsbD0iI2I4YzJiNyIvPjxwYXRoIGQ9Ik0wIDU2NSAxODUgMzEyIDMxMCA0NTAgNDgwIDIxMCA2NTAgNDU1IDc5NSAyNTYgOTM1IDM5MiAxMDUwIDI2NyAxMzAwIDUzNVY4MDBIMFoiIGZpbGw9IiM3MDhiOTEiLz48cGF0aCBkPSJtMTg1IDMxMiA1OCA3OS01Mi0xOS00MCAyN1ptMjk1LTEwMiA5MCAxNDYtOTYtNTktODYgODRabTMxNSA0NiA3MyA5MS04MC00NC01OCA0OFptMjU1IDExIDc5IDkzLTg1LTQxLTY1IDQ5WiIgZmlsbD0iI2VkZjFlNyIvPjxwYXRoIGQ9Ik0wIDYyMCAyMzAgNTI1IDQxMCA1ODAgNjAwIDQ1NSA3NzUgNTcwIDk4NSA0ODUgMTMwMCA1ODBWODAwSDBaIiBmaWxsPSIjMzA1YTVjIi8+PHBhdGggZD0iTTAgNjk2IFEzMTAgNjUwIDYwMCA2NjIgVDEzMDAgNjQ5VjgwMEgwIiBmaWxsPSJ1cmwoI2xha2UpIi8+PHBhdGggZD0iTTAgNzAwUTMyMCA2NzEgNjA0IDY5MVQxMzAwIDY4MU0wIDc0N1EzNDAgNzEwIDY3NSA3NDBUMTMwMCA3MjIiIHN0cm9rZT0iI2EzYzFiMiIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iLjMiIHN0cm9rZS13aWR0aD0iNSIvPjxwYXRoIGQ9Ik0wIDYzNiAxNzAgNTM3IDE5MCA2ODAgMjYwIDU1NSAzMzAgNjYwIDQxMCA1NzYgNDkwIDY4OSA1MjAgNjA0IDYwMCA3NDBIMFoiIGZpbGw9IiMxNzNlNDYiLz48cGF0aCBkPSJNMTAwMCA3MTQgMTA2MCA1MzQgMTEyMCA2ODggMTE1NSA1NjggMTIzMCA3MzEgMTI4MCA2MzQgMTMwMCA3MThWODAwSDEwMDBaIiBmaWxsPSIjMWI0NTQ5Ii8+PGcgZmlsbD0iIzFjNDE0NCI+PHBhdGggZD0ibTU4IDU2Ni0zNiA5OGg3N1ptOTItMzItNDYgMTQ3aDEwMVptMTkwIDE1LTUyIDE0OGgxMTNabTc3MC0zLTQ1IDE1M2gxMDhabTk4IDIwLTQxIDEzMmg5N1oiLz48L2c+PC9zdmc+','02':'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzAwIDgwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJza3kiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzI5NDY1ZiIvPjxzdG9wIG9mZnNldD0iLjU1IiBzdG9wLWNvbG9yPSIjZDA5YjdlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZjZjNjhhIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9InJvY2siIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2E2NGUzYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzZjM2QzOSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMzAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0idXJsKCNza3kpIi8+PGNpcmNsZSBjeD0iMTAxMCIgY3k9IjE3MiIgcj0iOTUiIGZpbGw9IiNmOGQ0YWMiIG9wYWNpdHk9Ii44NSIvPjxwYXRoIGQ9Ik0wIDQ5MFEyMTAgNDYwIDM4MCA1MDBUNzAwIDQ2MyAxMDUwIDQ2NSAxMzAwIDQ3N1Y4MDBIMFoiIGZpbGw9IiNjZjhkNjQiLz48cGF0aCBkPSJNMCA0OTBoMTc1bDQwLTE1NWgxNzBsMjggMTU1aDExMmwzMi0yMzBoMTcwbDUzIDI0MGgxMjVsMzUtMTgwaDE0NmwyOCAxODBoMTk2djMwMEgwWiIgZmlsbD0idXJsKCNyb2NrKSIvPjxwYXRoIGQ9Ik0wIDUzNWgxOTJ2LTMwaDIzNXYyNGg5NVYzNDhoMjA1djIxMGgxNDVWNDEwaDE5MHYxMThoMjM4VjgwMEgwWiIgZmlsbD0iI2E3NWE0NSIvPjxwYXRoIGQ9Ik0wIDU5MlEyOTAgNTM1IDUzNSA2MDBUMTMwMCA1NzVWODAwSDBaIiBmaWxsPSIjYjA2YzRiIi8+PHBhdGggZD0iTTAgNjcwUTI4MCA2MjIgNTQ1IDY0OFQxMzAwIDY0M1Y4MDBIMFoiIGZpbGw9IiNkNDk1NjUiLz48cGF0aCBkPSJNNDA1IDgwMFE1MzggNjgwIDY4MCA1ODBRODA3IDY2NiA5NDUgODAwWiIgZmlsbD0iIzM5MmYzNiIvPjxwYXRoIGQ9Ik02MDQgODAwIDY4MyA2MTAgNzM3IDgwMCIgZmlsbD0iI2U0YmM4NiIgb3BhY2l0eT0iLjg1Ii8+PHBhdGggZD0iTTAgNzIzUTI0MCA2ODIgMzQwIDczN1Q1OTAgNzQwTTc0NSA3MDlROTQ1IDY4MiAxMzAwIDcxNCIgc3Ryb2tlPSIjZjZjOTk2IiBvcGFjaXR5PSIuMzUiIHN0cm9rZS13aWR0aD0iNCIgZmlsbD0ibm9uZSIvPjxnIGZpbGw9IiM1MTRjM2UiPjxwYXRoIGQ9Ik05MCA3MDZ2LTcwbTAgMjUtMjQtMThtMjQgOSAyMy0xN00xMDkwIDcwMHYtMTAwbTAgMzQtMzgtMjBtMzggNCAyNy0yMiIgc3Ryb2tlPSIjNTE0YzNlIiBzdHJva2Utd2lkdGg9IjExIiBmaWxsPSJub25lIi8+PC9nPjwvc3ZnPg==','03':'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzAwIDgwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJza3kiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iIzUyNmY4MyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2M2ZDhjMCIvPjwvbGluZWFyR3JhZGllbnQ+PHJhZGlhbEdyYWRpZW50IGlkPSJwb29sIj48c3RvcCBzdG9wLWNvbG9yPSIjMDU0ZTdkIi8+PHN0b3Agb2Zmc2V0PSIuMzUiIHN0b3AtY29sb3I9IiMwMGE2YWQiLz48c3RvcCBvZmZzZXQ9Ii42MyIgc3RvcC1jb2xvcj0iIzZlYzZhMSIvPjxzdG9wIG9mZnNldD0iLjgiIHN0b3AtY29sb3I9IiNlZmJlNTMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiNzVlMzUiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTMwMCIgaGVpZ2h0PSI4MDAiIGZpbGw9InVybCgjc2t5KSIvPjxwYXRoIGQ9Ik0wIDM4NSAyMzAgMjMwIDQxMCAzNjAgNjQwIDE3NSA4NDUgMzIwIDEwNTAgMjE1IDEzMDAgMzY1VjgwMEgwWiIgZmlsbD0iIzgwOTM4YSIvPjxwYXRoIGQ9Ik0wIDQ3NVEyNzAgMzk1IDUyMCA0NTFUMTA1MCA0MjUgMTMwMCA0NjhWODAwSDBaIiBmaWxsPSIjNTQ3NTY3Ii8+PHBhdGggZD0iTTAgNTUyUTMxMCA0OTggNjIwIDU0MVQxMzAwIDUyNVY4MDBIMFoiIGZpbGw9IiM3ODk3ODEiLz48ZWxsaXBzZSBjeD0iNjY0IiBjeT0iNjIwIiByeD0iNDgzIiByeT0iMTgxIiBmaWxsPSIjYmE4YjVkIi8+PGVsbGlwc2UgY3g9IjY1NCIgY3k9IjYwNyIgcng9IjQxOCIgcnk9IjE0NyIgZmlsbD0iI2U2YWQ1ZCIvPjxlbGxpcHNlIGN4PSI2NTIiIGN5PSI2MDUiIHJ4PSIzNjQiIHJ5PSIxMjUiIGZpbGw9InVybCgjcG9vbCkiLz48cGF0aCBkPSJNMCA3NDBRNDMwIDY3NSA1OTAgNzk5SDBNMTMwMCA3MTVRMTAzMCA2NjggODc1IDgwMGg0MjUiIGZpbGw9IiMyOTRkNGMiLz48ZyBzdHJva2U9IiNlZWY3ZWEiIGZpbGw9Im5vbmUiIG9wYWNpdHk9Ii43IiBzdHJva2Utd2lkdGg9IjE2IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik01MjAgNDgwUTQyMCAzMjAgNTQwIDIyMCIvPjxwYXRoIGQ9Ik02NzAgNDU0UTc3MCAyOTAgNzAyIDE3MCIvPjxwYXRoIGQ9Ik04MjAgNDk0UTkwNSAzMTAgODgwIDIyMCIvPjwvZz48ZyBzdHJva2U9IiNmNGZjZjEiIGZpbGw9Im5vbmUiIG9wYWNpdHk9Ii40IiBzdHJva2Utd2lkdGg9IjI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik01NTAgNDc1UTYwMCAzNTAgNTgwIDI3MCIvPjxwYXRoIGQ9Ik03NDAgNDY4UTY5NSAzMjAgODAwIDIyOCIvPjwvZz48L3N2Zz4='};
 art['06']=art['01'];
 function renderCards(){let html='';for(const [id,r] of Object.entries(routes)){if(id==='custom'&&!state.customOrder.length)continue;html+=`<button class="route-card" type="button" data-route="${id}" aria-pressed="${state.route===id}"><div class="route-img" style="background-image:linear-gradient(30deg,#21343822,#2b454f12),url('${r.photo}'),url('${art[r.num]||art['02']}')"><span class="route-number">RUTE ${r.num}</span><span class="route-selected">✓ Valgt</span></div><div class="route-info"><div class="route-title">${r.name}</div><p class="route-desc">${r.desc}</p><div class="pills">${r.tags.map(t=>`<span class="pill">${t}</span>`).join('')}</div></div></button>`}$('route-cards').innerHTML=html;document.querySelectorAll('[data-route]').forEach(btn=>btn.addEventListener('click',()=>{state.route=btn.dataset.route;state.routeChosen=true;if(state.route!=='custom')state.lastPresetRoute=state.route;state.selectedDay=0;state.selectedStop=null;save();render();document.querySelector('#ruter').scrollIntoView({behavior:'smooth',block:'start'})}))}
-function renderStats(){const r=currentRoute();$('selected-route-kicker').textContent=`RUTE ${r.num} / ${r.small}`;$('selected-route-title').textContent=r.name;$('selected-route-lead').textContent=r.lead+(state.route==='sw'&&state.zion?' Zion er nå med. Dette gjør dag 5 og 6 mer kjøretunge og fjerner en hel dag i Moab.':'');$('route-flag').textContent=r.badge;$('selected-stats').innerHTML=[['Fly',r.airport],['Lengde','14 dager inkl. fly'],['Tempo',r.tempo],['Vurdering',r.drive]].map(([a,b])=>`<div class="plan-stat"><span class="stlab">${a}</span><span class="stval">${b}</span></div>`).join('') ;const action=$('active-custom-share');
+function renderStats(){const r=currentRoute();$('selected-route-kicker').textContent=`RUTE ${r.num} / ${r.small}`;$('selected-route-title').textContent=r.name;$('selected-route-lead').textContent=r.lead+(state.route==='sw'&&state.zion?' Zion er nå med. Dette gjør dag 5 og 6 mer kjøretunge og fjerner en hel dag i Moab.':'');$('route-flag').textContent=r.badge;$('selected-stats').innerHTML=[['Fly',r.airport],['Lengde',tripTime().mode==='usa'?tripTime().input+' dager i USA + fly':tripTime().totalDays+' dager inkl. fly'],['Tempo',r.tempo],['Vurdering',r.drive]].map(([a,b])=>`<div class="plan-stat"><span class="stlab">${a}</span><span class="stval">${b}</span></div>`).join('') ;const action=$('active-custom-share');
  if(action){action.hidden=!(state.route==='custom'&&customReady());
   if(!action.hidden){action.innerHTML='<strong>Del deres egen rute</strong><button type="button" class="btn btn-dark" id="share-active-download">⬇ Last ned valgt rute som HTML</button><button type="button" class="btn btn-light" id="share-active-copy">🔗 Kopier Google Maps-etapper</button>';
     $('share-active-download').addEventListener('click',downloadCustomRoute);
@@ -598,7 +738,7 @@ function renderBuilderChoices(){
  $('custom-count').textContent=state.customKeys.length+' valgt';
  $('custom-stops').innerHTML=state.customKeys.length?state.customKeys.map(key=>`<button class="picked-chip" type="button" data-remove-stop="${escapeHTML(key)}" aria-label="Fjern ${escapeHTML(routeChoiceLabel(key))}">✓ ${escapeHTML(routeChoiceLabel(key))} ×</button>`).join(''):'<p class="build-empty">Dere har ikke krysset av noen bilder ennå.</p>';
  $('custom-stops').querySelectorAll('[data-remove-stop]').forEach(b=>b.addEventListener('click',()=>toggleGalleryPlace(b.dataset.removeStop,false)));
- document.querySelectorAll('[data-gallery-select]').forEach(input=>{input.checked=chosen.has(input.dataset.gallerySelect);input.closest('.place-card')?.classList.toggle('gallery-checked',input.checked)});
+ document.querySelectorAll('[data-gallery-select]').forEach(input=>{input.checked=chosen.has(input.dataset.gallerySelect);input.closest('.place-card')?.classList.toggle('gallery-checked',input.checked);const badge=input.closest('.gallery-check')?.querySelector('span');if(badge)badge.textContent=input.checked?'✓ Valgt':'Ta med i ruten';});
  const top=$('gallery-selection-count');if(top)top.textContent=chosen.size+' steder valgt';
 }
 function toggleGalleryPlace(key,checked){
@@ -612,11 +752,44 @@ function toggleGalleryPlace(key,checked){
  save();
  if(hadCustomRoute)render();
  renderBuilderChoices();renderBuilderPreview();
+ // Oppdater også hjelpeteksten når noen legges til eller trekkes fra, uten å laste inn bildene på nytt.
+ const notice=$('gallery-count');
+ if(notice){
+  const base=galleryRouteOrder.includes(state.customBaseRoute)?state.customBaseRoute:'';
+  notice.textContent=base?`Alle ${galleryAllKeys.length} reisemål vises. ${state.customKeys.length} er nå avkrysset. ${stopsFromPreset(base).length} tilhører rute ${routes[base].num}. Legg til eller trekk fra fritt.`:`Alle ${galleryAllKeys.length} reisemål vises. ${state.customKeys.length} er avkrysset.`;
+ }
+}
+function stopsFromPreset(id){
+ if(!galleryRouteOrder.includes(id))return [];
+ const routeStops=(id==='sw'&&state.zion?namedStops.swz:namedStops[id])||[];
+ const actual=[...new Set(routeStops.flatMap(group=>group||[]))].filter(key=>routeBuilderKeys.includes(key));
+ // Flyplasser som bare forekommer på ankomst-/avreisedagen er logistikk, ikke valgte severdigheter.
+ const airportOnly=new Set(['den','phx','lv','slc']);
+ return actual.filter(key=>!airportOnly.has(key)||routeStops.slice(1,-1).some(group=>group.includes(key)));
+}
+function importPresetStops(id){
+ if(!galleryRouteOrder.includes(id))return;
+ const selected=stopsFromPreset(id);
+ if(!selected.length){toast('Fant ingen stopp på denne ruten');return;}
+ const hadCustomRoute=state.route==='custom';
+ state.customKeys=selected;
+ state.customBaseRoute=id;
+ state.customOrder=[];
+ if(hadCustomRoute){state.route=state.lastPresetRoute||'';state.selectedDay=0;state.selectedStop=null;}
+ // Vis alle bilder, også stopp som ikke inngår i utgangspunktet.
+ galleryFilter='*';
+ save();if(hadCustomRoute)render();
+ placesGallery();renderBuilderPreview();
+ $('gallery-route-start').value=id;
+ $('gallery-route-start-notice').textContent=`Rute ${routes[id].num}: ${selected.length} stopp er automatisk huket av. Alle ${galleryAllKeys.length} stedene vises nedenfor – rute-stoppene først, deretter de øvrige, så dere kan legge til eller fjerne fritt.`;
+ $('airport-advice').textContent='Velg flyplassene dere ønsker, eller bruk «Finn anbefalte flyplasser» for en geografisk vurdering.';
+ toast(`Rute ${routes[id].num} er klar til å tilpasses`);
 }
 function resetCustomSelection(){
  const hadCustomRoute=state.route==='custom';
- state.customKeys=[];state.customOrder=[];
+ state.customKeys=[];state.customOrder=[];state.customBaseRoute='';
  state.customFrom='';state.customTo='';
+ $('gallery-route-start').value='';$('gallery-route-start-notice').textContent='';
  $('airport-advice').textContent='Velg steder fra bildene for å få et forslag til passende flyplasser. Forslaget vurderer geografien, ikke flypris eller leiebilpris.';
  if(hadCustomRoute){state.route=state.lastPresetRoute;state.selectedDay=0;state.selectedStop=null;}
  save();render();placesGallery();renderBuilderPreview();
@@ -696,22 +869,22 @@ function googleCustomRoute(order){const parts=googleMapOptions(order);return par
   if(!customReady()){$('custom-preview').innerHTML='';return;}
   const order=orderedCustom(),dist=Math.round(seqDistance(order,state.customFrom,state.customTo));
   const warn=[];
-  if(picked.length>11)warn.push('Mer enn elleve stopp gjør det nødvendig å kombinere flere på samme dag.');
+  if(picked.length>tripTime().fullDays)warn.push('Flere stopp enn hele opplevelsesdager: Noen steder må kombineres samme dag.');
   if(picked.length>12)warn.push('Mange stopp: Det blir sannsynligvis for lite tid til opplevelsene.');
   if(dist>1600)warn.push('Stor geografisk spredning: ruten kan bli svært kjøretung.');
-  if(dist>2600)warn.push('Dette er en svært lang tur på 14 dager inkludert fly.');
+  if(dist>2600)warn.push('Dette er en svært lang tur sett opp mot '+tripTime().fullDays+' hele opplevelsesdager.');
   if(airKm(order.at(-1),state.customTo)>200)warn.push('Siste stopp ligger langt fra hjemreiseflyplassen. Sett av tid til den overføringen.');
-  $('custom-preview').innerHTML=`<div class="custom-preview-heading">Valgt rute</div><div id="preview-share-slot"></div><div class="build-data"><span>${picked.length} stopp</span><span>${dist.toLocaleString('nb-NO')} km luftlinje mellom stopp og flyplasser</span><span>11 opplevelsesdager</span></div><ol class="route-preview-list"><li>✈ ${escapeHTML(loc[state.customFrom][0])} – ankomst</li>${order.map((key,i)=>`<li>${i+1}. ${escapeHTML(routeChoiceLabel(key))}</li>`).join('')}<li>✈ ${escapeHTML(loc[state.customTo][0])} – hjemreise</li></ol><div class="build-warning ${warn.length?'':'build-ok'}"><b>${warn.length?'Viktig før dere velger:':'Foreløpig ruteutkast'}</b><br>${escapeHTML(warn.length?warn.join(' '):'Geografisk sortering, ikke en verifisert kjørerute. Kontroller veiene og avstandene før dere bestemmer dere.')}</div>${googleMapsHTML(order)}`;
+  $('custom-preview').innerHTML=`<div class="custom-preview-heading">Valgt rute</div><div id="preview-share-slot"></div><div class="build-data"><span>${picked.length} stopp</span><span>${dist.toLocaleString('nb-NO')} km luftlinje mellom stopp og flyplasser</span><span>${tripTime().fullDays} hele opplevelsesdager (anslag)</span></div><ol class="route-preview-list"><li>✈ ${escapeHTML(loc[state.customFrom][0])} – ankomst</li>${order.map((key,i)=>`<li>${i+1}. ${escapeHTML(routeChoiceLabel(key))}</li>`).join('')}<li>✈ ${escapeHTML(loc[state.customTo][0])} – hjemreise</li></ol><div class="build-warning ${warn.length?'':'build-ok'}"><b>${warn.length?'Viktig før dere velger:':'Foreløpig ruteutkast'}</b><br>${escapeHTML(warn.length?warn.join(' '):'Geografisk sortering, ikke en verifisert kjørerute. Kontroller veiene og avstandene før dere bestemmer dere.')}</div>${googleMapsHTML(order)}`;
   $('preview-share-slot').appendChild($('share-options'));
  }
 
- function customShareSummary(){const order=orderedCustom();return ['USA ROADTRIP 2027 – DERES RUTE','14 dager totalt, inkludert flyreisene','',`Fly til: ${loc[state.customFrom][0]}`,...order.map((k,i)=>`${i+1}. ${routeChoiceLabel(k)}`),`Fly hjem fra: ${loc[state.customTo][0]}`,'','Dette er et geografisk ruteforslag. Kjøretider og kjøreveier er ikke verifisert.'].join('\n');}
+ function customShareSummary(){const order=orderedCustom();return ['USA ROADTRIP 2027 – DERES RUTE',tripDescription(),'',`Fly til: ${loc[state.customFrom][0]}`,...order.map((k,i)=>`${i+1}. ${routeChoiceLabel(k)}`),`Fly hjem fra: ${loc[state.customTo][0]}`,'','Dette er et geografisk ruteforslag. Kjøretider og kjøreveier er ikke verifisert.'].join('\n');}
  function exportedRouteHTML(){
   const order=orderedCustom(),from=routeChoiceLabel(state.customFrom),to=routeChoiceLabel(state.customTo);
   const cards=order.map((k,i)=>{const info=placeInfo[k]||{title:routeChoiceLabel(k),text:'Aktuelt stopp på turen.'},photo=photoSource(k);
    return `<article><div class="figure">${photo?`<img src="${escapeHTML(photo.url)}" alt="${escapeHTML(info.title)}" loading="lazy">`:'<div class="alt">USA ROADTRIP 2027</div>'}</div><div class="content"><small>STOPP ${String(i+1).padStart(2,'0')}</small><h2>${escapeHTML(routeChoiceLabel(k))}</h2><p>${escapeHTML(info.text||'')}</p>${photo?`<a href="${escapeHTML(photo.page)}" target="_blank" rel="noopener noreferrer">Foto og lisens ↗</a>`:''}</div></article>`;}).join('');
   const maps=googleMapsHTML(order);
-  return `<!doctype html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>USA Roadtrip 2027 – vår rute</title><style>*{box-sizing:border-box}body{margin:0;color:#173238;background:#f7f5ef;font-family:system-ui,-apple-system,sans-serif;line-height:1.6}header{background:#142d34;color:white;padding:55px max(24px,calc((100% - 900px)/2))}header small,.content small{color:#e3a46f;letter-spacing:.15em;font-weight:800}h1{font-size:clamp(35px,6vw,62px);line-height:1.04;margin:14px 0}main{max-width:900px;margin:0 auto;padding:24px}article{display:grid;grid-template-columns:minmax(200px, 45%) 1fr;background:white;border-radius:20px;overflow:hidden;margin:18px 0;box-shadow:0 10px 30px #142d3410}.figure{min-height:235px;background:#a1bbad}.figure img{width:100%;height:100%;object-fit:cover;display:block}.alt{height:100%;min-height:235px;display:grid;place-items:center;background:linear-gradient(130deg,#597d75,#d3a679);color:white}.content{padding:25px}.content h2{font-size:26px;line-height:1.15;margin:8px 0}.content p{font-size:14px;color:#566969}.content a{font-size:12px;color:#286d5c}.chip{display:inline-block;background:#ecf1ed;border-radius:12px;padding:10px 16px;margin:5px;font-weight:800;color:#254b40}.note{padding:18px;border-radius:13px;background:#fff4e5;margin:25px 0;font-size:14px}a{color:#2c675c}.maps-route-links{display:flex;flex-wrap:wrap;gap:9px}.maps-route-links a{padding:10px 14px;border-radius:10px;background:white;border:1px solid #d9e4da;text-decoration:none;font-size:13px;font-weight:700}.maps-route-note{font-size:13px;color:#516a62}@media(max-width:630px){article{grid-template-columns:1fr}.figure{height:240px}header{padding:38px 24px}}@media print{article{break-inside:avoid}} </style></head><body><header><h1>Vår USA-roadtrip</h1><p>Personlig ruteforslag · 14 dager inkludert flyreiser</p><div class="chip">✈ ${escapeHTML(from)} → ${escapeHTML(to)}</div></header><main><p><b>${order.length} valgte stopp</b> · Rekkefølge sortert geografisk</p>${cards}<div class="note"><b>Før dere bestiller:</b> Dette er en skisse sortert etter luftlinje, ikke en bekreftet kjørerute. Dagsetapper, avstander, reisetid og tilgang til parker må kontrolleres. Fotografier lastes via nettet.</div><h2>Se ruten i Google Maps</h2>${maps}</main></body></html>`;
+  return `<!doctype html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>USA Roadtrip 2027 – vår rute</title><style>*{box-sizing:border-box}body{margin:0;color:#173238;background:#f7f5ef;font-family:system-ui,-apple-system,sans-serif;line-height:1.6}header{background:#142d34;color:white;padding:55px max(24px,calc((100% - 900px)/2))}header small,.content small{color:#e3a46f;letter-spacing:.15em;font-weight:800}h1{font-size:clamp(35px,6vw,62px);line-height:1.04;margin:14px 0}main{max-width:900px;margin:0 auto;padding:24px}article{display:grid;grid-template-columns:minmax(200px, 45%) 1fr;background:white;border-radius:20px;overflow:hidden;margin:18px 0;box-shadow:0 10px 30px #142d3410}.figure{min-height:235px;background:#a1bbad}.figure img{width:100%;height:100%;object-fit:cover;display:block}.alt{height:100%;min-height:235px;display:grid;place-items:center;background:linear-gradient(130deg,#597d75,#d3a679);color:white}.content{padding:25px}.content h2{font-size:26px;line-height:1.15;margin:8px 0}.content p{font-size:14px;color:#566969}.content a{font-size:12px;color:#286d5c}.chip{display:inline-block;background:#ecf1ed;border-radius:12px;padding:10px 16px;margin:5px;font-weight:800;color:#254b40}.note{padding:18px;border-radius:13px;background:#fff4e5;margin:25px 0;font-size:14px}a{color:#2c675c}.maps-route-links{display:flex;flex-wrap:wrap;gap:9px}.maps-route-links a{padding:10px 14px;border-radius:10px;background:white;border:1px solid #d9e4da;text-decoration:none;font-size:13px;font-weight:700}.maps-route-note{font-size:13px;color:#516a62}@media(max-width:630px){article{grid-template-columns:1fr}.figure{height:240px}header{padding:38px 24px}}@media print{article{break-inside:avoid}} </style></head><body><header><h1>Vår USA-roadtrip</h1><p>Personlig ruteforslag · ${escapeHTML(tripDescription())}</p><div class="chip">✈ ${escapeHTML(from)} → ${escapeHTML(to)}</div></header><main><p><b>${order.length} valgte stopp</b> · Rekkefølge sortert geografisk</p>${cards}<div class="note"><b>Før dere bestiller:</b> Dette er en skisse sortert etter luftlinje, ikke en bekreftet kjørerute. Dagsetapper, avstander, reisetid og tilgang til parker må kontrolleres. Fotografier lastes via nettet.</div><h2>Se ruten i Google Maps</h2>${maps}</main></body></html>`;
  }
  function downloadCustomRoute(){
   if(!customReady()){toast('Velg stopp og begge flyplassene først');return;}
@@ -729,13 +902,14 @@ function googleCustomRoute(order){const parts=googleMapOptions(order);return par
   copyValue(lines.join('\n\n'), 'Google Maps-lenkene er kopiert');
  }
  function copySharedRouteLink(){if(!customReady()||!/^https?:$/.test(location.protocol))return;
-  const data={v:1,keys:[...state.customKeys],from:state.customFrom,to:state.customTo};
+  const data={v:1,keys:[...state.customKeys],from:state.customFrom,to:state.customTo,tripDays:state.tripDays,tripMode:state.tripMode};
   const url=location.href.split('#')[0]+'#min-rute='+encodeURIComponent(JSON.stringify(data));
   copyValue(url,'Delingslenken er kopiert');
  }
 
 function wireBuilder(){for(const key of ['from','to'])$('custom-'+key).addEventListener('change',e=>{const hadCustomRoute=state.route==='custom';state['custom'+(key==='from'?'From':'To')]=e.target.value;state.customOrder=[];if(hadCustomRoute){state.route=state.lastPresetRoute;state.selectedDay=0;state.selectedStop=null;}save();if(hadCustomRoute)render();renderBuilderPreview()});
- $('custom-current').addEventListener('click',()=>{if(!state.route){toast('Velg først en av rutene ovenfor');return;}state.customKeys=[...new Set(getDays().flatMap(d=>d.stops||[d.to]).filter(k=>k&&loc[k]&&!['phx','den','lv','slc'].includes(k)))];save();renderBuilderChoices();renderBuilderPreview()});
+ $('custom-current').addEventListener('click',()=>{const preset=galleryRouteOrder.includes(state.route)?state.route:state.lastPresetRoute;if(!preset){toast('Velg først en av de seks rutene');return;}importPresetStops(preset);document.querySelector('#steder').scrollIntoView({behavior:'smooth',block:'start'});});
+  $('gallery-route-start').addEventListener('change',e=>importPresetStops(e.target.value));
  $('custom-clear').addEventListener('click',resetCustomSelection);
  $('clear-gallery-selection').addEventListener('click',resetCustomSelection);
  $('custom-build').addEventListener('click',()=>{if(!customReady()){toast('Velg reisemål, fly til og fly hjem fra først');return;}if(state.route!=='custom')state.lastPresetRoute=state.route;state.customOrder=orderedCustom();state.route='custom';state.routeChosen=true;state.selectedDay=0;state.selectedStop=null;save();render();document.querySelector('#ruter .plan-top').scrollIntoView({behavior:'smooth',block:'start'});toast('Deres personlige rute er nå valgt ✓')});
@@ -768,19 +942,44 @@ function galleryPlaceTitle(key){
 }
 function placesGallery(){
  const filters=[['*',`Alle steder (${galleryAllKeys.length})`],...galleryRouteOrder.map(id=>[id,`Rute ${routes[id].num}`])];
- $('gallery-filters').innerHTML=filters.map(([id,name])=>`<button type="button" class="gallery-filter ${galleryFilter===id?'active':''}" data-gallery-filter="${id}" aria-pressed="${galleryFilter===id}">${escapeHTML(name)}</button>`).join('');
- $('gallery-filters').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{galleryFilter=b.dataset.galleryFilter;placesGallery()}));
+ // Knappene er et hurtigtvalg for hvilke steder som skal hukes av, IKKE et filter.
+ // Alle 52 bildekort skal alltid være synlige, også når en rute er forhåndsvalgt.
+ const activePreset=galleryRouteOrder.includes(state.customBaseRoute)?state.customBaseRoute:'*';
+ $('gallery-filters').innerHTML=filters.map(([id,name])=>`<button type="button" class="gallery-filter ${activePreset===id?'active':''}" data-gallery-filter="${id}" aria-pressed="${activePreset===id}" title="${id==='*'?'Vis alle steder uten gruppering':'Huk av stoppene fra '+name+' og vis fortsatt alle stedene'}">${escapeHTML(name)}</button>`).join('');
+ $('gallery-filters').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+  const id=b.dataset.galleryFilter;
+  if(id==='*'){
+   // Fjern bare gruppering, ikke den brukerdefinerte avkryssingen.
+   state.customBaseRoute='';galleryFilter='*';save();
+   $('gallery-route-start').value='';
+   $('gallery-route-start-notice').textContent=state.customKeys.length?'Alle reisemål vises alfabetisk etter delstat. De avkrysningene dere allerede har gjort, beholdes. Bruk «Nullstill valg» for å begynne helt på nytt.':'';
+   placesGallery();return;
+  }
+  importPresetStops(id);
+ }));
  // Sorter først etter delstat, deretter alfabetisk etter stedsnavn innen hver delstat.
- const visible=[...(galleryFilter==='*'?galleryAllKeys:galleryRouteKeys[galleryFilter]||[])].sort((a,b)=>{
+ const visible=[...galleryAllKeys].sort((a,b)=>{
   const sa=galleryStates[a]||'ZZ',sb=galleryStates[b]||'ZZ';
   return sa.localeCompare(sb,'nb')||routeChoiceLabel(a).localeCompare(routeChoiceLabel(b),'nb',{sensitivity:'base',numeric:true});
  });
- $('gallery-count').innerHTML=`Viser ${visible.length} steder. Filtrer etter rute eller velg fritt fra alle.`;
- $('places-gallery').innerHTML=visible.map(key=>{
+ const base=galleryRouteOrder.includes(state.customBaseRoute)?state.customBaseRoute:'';
+ const presetKeys=base?new Set(stopsFromPreset(base)):new Set();
+ const selectedFromPreset=base?visible.filter(key=>presetKeys.has(key)):[];
+ const otherPlaces=base?visible.filter(key=>!presetKeys.has(key)):[];
+ const displayItems=base?[
+  {section:`Rute ${routes[base].num} – stopp fra ruteforslaget`,count:selectedFromPreset.length,other:false},
+  ...selectedFromPreset.map(key=>({key})),
+  {section:'Andre reisemål dere kan legge til',count:otherPlaces.length,other:true},
+  ...otherPlaces.map(key=>({key}))
+ ]:visible.map(key=>({key}));
+ $('gallery-count').textContent=base?`Alle ${visible.length} reisemål vises. ${state.customKeys.length} er nå avkrysset. ${selectedFromPreset.length} tilhører rute ${routes[base].num}. Legg til eller trekk fra fritt.`:`Alle ${visible.length} reisemål vises. Velg en ferdig rute for automatisk avkryssing, eller kryss av stedene selv.`;
+ $('places-gallery').innerHTML=displayItems.map(item=>{
+  if(item.section)return `<div class="gallery-section-label ${item.other?'other':''}">${escapeHTML(item.section)} <small>(${item.count} steder)</small></div>`;
+  const key=item.key;
   const info=placeInfo[key]||{title:loc[key]?.[0]||key},source=photoSource(key),checked=state.customKeys.includes(key);
   const nr=galleryRouteOrder.filter(id=>galleryRouteKeys[id].includes(key)).map(id=>routes[id].num).join(' · ');
   return `<article class="place-card ${checked?'gallery-checked':''}">
-   <label class="gallery-check"><input type="checkbox" data-gallery-select="${escapeHTML(key)}" ${checked?'checked':''} aria-label="Ta med ${escapeHTML(info.title)} i egen rute"><span>Ta med i ruten</span></label>
+   <label class="gallery-check"><input type="checkbox" data-gallery-select="${escapeHTML(key)}" ${checked?'checked':''} aria-label="Ta med ${escapeHTML(info.title)} i egen rute"><span>${checked?'✓ Valgt':'Ta med i ruten'}</span></label>
    <button type="button" class="gallery-open" data-gallery-stop="${escapeHTML(key)}" aria-label="Åpne stedskort for ${escapeHTML(info.title)}">
     <div class="place-img" data-image-key="${escapeHTML(key)}" style="background-image:${sceneBackground(key)}">
      ${source?`<img class="gallery-photo-img" data-photo-key="${escapeHTML(key)}" loading="lazy" decoding="async" alt="${escapeHTML(info.title)}">`:''}
@@ -843,8 +1042,120 @@ function inlineStopCard(key,d,i){
  const chips=(info.highlights||[]).map(x=>`<span>${escapeHTML(x)}</span>`).join('');
  return `<div class="inline-stop" data-expanded-place="${escapeHTML(key)}"><div class="inline-stop-photo" style="background-image:${p.bg}">${img}<a class="inline-photo-credit" target="_blank" rel="noopener noreferrer" href="${href}">${src?'Fotografi og kilde ↗':'Se informasjon ↗'}</a></div><div class="inline-stop-content"><h5>${escapeHTML(routeChoiceLabel(key))}</h5><p>${escapeHTML(info.text)}</p><div class="inline-highlights">${chips}</div><p class="inline-trip"><b>På denne ruten · dag ${i+1}</b><br>${escapeHTML(d.summary)}. ${escapeHTML(d.detail)}</p><p class="inline-tip"><b>Verdt å vite:</b> ${escapeHTML(info.tip)}</p><a class="inline-map-link" href="${mapUrl}" target="_blank" rel="noopener noreferrer">Finn stedet i Google Maps ↗</a></div></div>`;
 }
+// Kilometervisning: faktisk kjørelengde fra veinett når en rutetjeneste svarer.
+// Aldri vis luftlinje som om den er kjørelengde.
+const roadKmCache=new Map();
+let activeKmRequest=0,activeKmRoute='';
+const kmNumber=n=>Math.round(n).toLocaleString('nb-NO');
+function itineraryStopKeys(){
+ const keys=[];
+ function add(k){if(k&&loc[k]&&keys.at(-1)!==k)keys.push(k)}
+ for(const d of getDays()){
+  add(d.from);
+  for(const k of stopIdsForDay(d))add(k);
+  add(d.to);
+ }
+ return keys;
+}
+function routeKmCacheKey(keys){return keys.join('|')}
+function kmLegGoogleLink(a,b){return mapsDirectionsUrl([a,b])}
+function kmResultFor(keys){return roadKmCache.get(routeKmCacheKey(keys))}
+function setRouteView(mode){
+ if(!['days','km'].includes(mode))return;
+ state.routeView=mode;save();renderJourneyView();
+}
+function renderJourneyView(){
+ const km=state.routeView==='km';
+ $('day-view').hidden=km;$('km-view').hidden=!km;
+ document.querySelectorAll('[data-route-view]').forEach(btn=>{
+  const on=btn.dataset.routeView===state.routeView;
+  btn.classList.toggle('active',on);btn.setAttribute('aria-pressed',String(on));
+ });
+ if(km)renderKmView();
+}
+function renderKmView(){
+ const keys=itineraryStopKeys(),sign=routeKmCacheKey(keys);
+ const previous=kmResultFor(keys);
+ if(previous?.status==='loading'&&activeKmRoute!==sign){roadKmCache.delete(sign);}
+ const record=kmResultFor(keys),legs=record?.legs||[];
+ const isLoading=record?.status==='loading',complete=record?.status==='done'&&legs.length===keys.length-1&&legs.every(Number.isFinite),
+       count=keys.length-1,available=legs.filter(Number.isFinite).length;
+ const sum=legs.filter(Number.isFinite).reduce((a,b)=>a+b,0);
+ const headline=complete?`Ca. ${kmNumber(sum)} km`:(available?`${kmNumber(sum)} km beregnet så langt`:(isLoading?'Beregner kjørekilometer…':'Kjørelengde ikke beregnet'));
+ const note=complete?'Summert kjøreavstand mellom stoppene på tilgjengelige veier, beregnet med OpenStreetMap-rutedata. Ingen reisedager er fordelt.':
+   isLoading?'Kontakter rutetjenesten for kjøreavstand mellom stoppene.':'Tjenesten for veiberegning svarte ikke. Du kan åpne etappene i Google Maps for å kontrollere kjørelengden.';
+ $('km-summary').innerHTML=`<div class="km-total">${headline}</div><div class="km-count">${count} kjøreetapper · ${keys.length} steder inkludert flyplassene</div><div class="km-caption">${note}</div>${isLoading?`<div class="km-progress">${available} av ${count} etapper beregnet</div>`:''}`;
+ const rows=keys.slice(1).map((key,i)=>{
+  const start=keys[i],distance=legs[i];
+  const val=Number.isFinite(distance)?`ca. ${kmNumber(distance)} km`:(isLoading?'Beregner…':'Se i Google Maps');
+  return `<button type="button" class="km-leg" data-km-stop="${escapeHTML(key)}" title="Se bilde og informasjon om ${escapeHTML(routeChoiceLabel(key))}"><span class="km-route-label"><strong>${escapeHTML(routeChoiceLabel(start))} → ${escapeHTML(routeChoiceLabel(key))}</strong><small>Etappe ${i+1} · Trykk for stedskort</small></span><span class="km-value ${Number.isFinite(distance)?'':isLoading?'is-loading':'is-missing'}">${val}</span></button>`;
+ });
+ $('km-legs').innerHTML=`<div class="km-route-head">Stopp i kjørerekkefølge – uavhengig av antall dager</div>${rows.join('')||'<p>Ingen stopp i denne ruten.</p>'}`;
+ $('km-legs').querySelectorAll('[data-km-stop]').forEach(btn=>btn.addEventListener('click',()=>{
+  const key=btn.dataset.kmStop,ds=getDays(),i=ds.findIndex(d=>stopIdsForDay(d).includes(key));
+  showStopDialog(key,i);
+ }));
+ const retry=!isLoading&&!complete?'<button type="button" class="km-retry" id="km-retry">↻ Prøv å beregne kilometer på nytt</button>':'';
+ $('km-footer').innerHTML=`Avstandene gjelder kjøring via veinettet mellom oppgitte stopp, ikke flyreiser. Ekstrakjøring rundt hotell, parkering og lokale utflukter kommer i tillegg. Veistengninger og sesongåpne fjellpass kan påvirke faktisk rute. ${retry}<div style="margin-top:7px"><a href="#map-external-links" class="km-to-maps">Se Google Maps-etappene ved rutekartet ↑</a></div>`;
+ $('km-retry')?.addEventListener('click',()=>{roadKmCache.delete(sign);loadKmDistances(keys,true)});
+ $('km-footer').querySelector('.km-to-maps')?.addEventListener('click',e=>{
+  e.preventDefault();const target=$('map-external-links');if(!target)return;
+  const top=window.scrollY+target.getBoundingClientRect().top-(window.innerWidth<=650?82:105);
+  window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+ });
+ if(!record)loadKmDistances(keys,false);
+}
+async function fetchRoadKmChunk(stops){
+ const coordinates=stops.map(k=>loc[k][2]+','+loc[k][1]).join(';');
+ const endpoints=[
+  'https://router.project-osrm.org/route/v1/driving/',
+  'https://routing.openstreetmap.de/routed-car/route/v1/driving/'
+ ];
+ for(const endpoint of endpoints){
+  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),8500);
+  try{
+   const resp=await fetch(endpoint+coordinates+'?overview=false&steps=false', {signal:controller.signal,mode:'cors',cache:'no-store'});
+   if(!resp.ok)throw Error('Tjenesten svarte '+resp.status);
+   const json=await resp.json();
+   if(json.code!=='Ok'||!json.routes?.[0]?.legs||json.routes[0].legs.length!==stops.length-1)throw Error('Ingen sammenhengende kjørerute');
+   return json.routes[0].legs.map(x=>Math.round(x.distance/1000));
+  }catch(e){/* Prøv sekundær ruteserver. */}
+  finally{clearTimeout(timeout)}
+ }
+ return null;
+}
+async function loadKmDistances(keys,retry){
+ const sign=routeKmCacheKey(keys);
+ const token=++activeKmRequest;
+ activeKmRoute=sign;
+ const result={status:'loading',legs:Array(keys.length-1).fill(null)};
+ roadKmCache.set(sign,result);
+ if(retry||state.routeView==='km')renderKmView();
+ // Maks åtte punkter per forespørsel, samme kjørerekkefølge som Google Maps-etappene.
+ let failures=0;
+ for(let start=0;start<keys.length-1;){
+  if(activeKmRoute!==sign||token!==activeKmRequest)return;
+  const end=Math.min(start+7,keys.length-1),part=keys.slice(start,end+1);
+  const distances=await fetchRoadKmChunk(part);
+  if(activeKmRoute!==sign||token!==activeKmRequest)return;
+  if(distances){distances.forEach((km,i)=>{result.legs[start+i]=km});}
+  else{failures++;}
+  if(state.routeView==='km'&&routeKmCacheKey(itineraryStopKeys())===sign)renderKmView();
+  start=end;
+  // Hvis ingen av rutetjenestene svarer, ikke send mange unødvendige forespørsler.
+  if(failures && !distances)break;
+ }
+ result.status=result.legs.every(Number.isFinite)?'done':'unavailable';
+ if(state.routeView==='km'&&routeKmCacheKey(itineraryStopKeys())===sign)renderKmView();
+}
 function renderDays(){
- const ds=getDays();state.selectedDay=Math.max(0,Math.min(ds.length-1,state.selectedDay));
+ const ds=getDays(),t=tripTime(),baseCount=baseDays().length;
+ const over=t.totalDays-baseCount;
+ $('day-view-intro').textContent=over<0?`Dette er en referanseplan på ${baseCount} dager. Du har valgt ${t.totalDays} dager totalt. Velg et stopp for detaljer.`:`Dag 1 er utreise og ankomst i USA, og dag ${ds.length} er avreise fra USA. Hjemkomst til Norge kan skje påfølgende dato og er ikke lagt inn som egen dag. Velg et stopp for detaljer.`;
+ const feedback=$('duration-day-feedback');
+ feedback.classList.toggle('warning',over<0);
+ feedback.innerHTML=over<0?`<b>${-over} dag${-over===1?'':'er'} for lite til denne skissen.</b> Alle stoppene er beholdt, men dere må kutte eller kombinere opplevelser. «Etapper og km» viser samme rute uten dagsfordeling.`:over>0?`<b>${over} ekstra dag${over===1?'':'er'} lagt inn som valgfrie pauser.</b> Dere kan flytte dem dit dere ønsker. Stoppene kan fordeles på dagene slik dere ønsker.`:`<b>${baseCount}-dagersutkast med to reisedager.</b> Dagene er et forslag, ikke en fast booking. Velg «Etapper og km» for å planlegge helt uten dagsfordeling.`;
+ state.selectedDay=Math.max(0,Math.min(ds.length-1,state.selectedDay));
  const keysNow=stopIdsForDay(ds[state.selectedDay]);
  if(!keysNow.includes(state.selectedStop))state.selectedStop=null;
  $('days-list').innerHTML=ds.map((d,i)=>{
@@ -884,7 +1195,7 @@ function renderMap(){
   pins+=`<g class="map-pin" role="button" tabindex="0" aria-label="Åpne ${escapeHTML(display)}" data-pin="${key}"><rect x="${bx}" y="${y-34}" width="${w}" height="54" fill="transparent" pointer-events="all"/><circle cx="${x}" cy="${y}" r="${active?12:8}" fill="${active?'#173d42':'#fff'}" stroke="${active?'#fff':'#ad673c'}" stroke-width="${active?4:3}"/><circle cx="${x}" cy="${y}" r="3" fill="${active?'#f3b279':'#b8663e'}"/><text class="map-pin-label" x="${tx}" y="${ty}" text-anchor="${anchor}">${escapeHTML(display)}</text></g>`;
  });
  svg.innerHTML=land+`<polyline class="map-routeline" points="${chain}"/><polyline class="map-routeinner" points="${chain}"/>`+pins;
- const openPin=key=>{const idx=ds.findIndex(d=>stopIdsForDay(d).includes(key));if(idx>=0){state.selectedDay=idx;state.selectedStop=key;save();renderDays();renderMap()}if(idx>=0){const active=$('days-list').querySelector(`[data-day="${idx}"][data-place="${key}"]`);if(active)active.scrollIntoView({block:'nearest',behavior:'smooth'});}else showStopDialog(key,idx)};
+ const openPin=key=>{const idx=ds.findIndex(d=>stopIdsForDay(d).includes(key));if(state.routeView==='km'){showStopDialog(key,idx);return;}if(idx>=0){state.selectedDay=idx;state.selectedStop=key;save();renderDays();renderMap()}if(idx>=0){const active=$('days-list').querySelector(`[data-day="${idx}"][data-place="${key}"]`);if(active)active.scrollIntoView({block:'nearest',behavior:'smooth'});}else showStopDialog(key,idx)};
  svg.querySelectorAll('[data-pin]').forEach(el=>{const act=()=>openPin(el.dataset.pin);el.addEventListener('click',act);el.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();act()}})});
  $('map-stop-buttons').innerHTML=unique.map(key=>`<button type="button" class="map-stop-button" data-pin-button="${key}" aria-pressed="${state.selectedStop===key}">📍 ${escapeHTML(routeChoiceLabel(key))}</button>`).join('');
  $('map-stop-buttons').querySelectorAll('[data-pin-button]').forEach(el=>el.addEventListener('click',()=>openPin(el.dataset.pinButton)));
@@ -894,19 +1205,53 @@ const groups={date:[['late','Dato ikke bestemt'],['16-29','Dato ikke bestemt'],[
 function renderChoiceSummary(){let messages=[];const r=currentRoute();if(state.route==='lv')messages.push('Las Vegas-ruten prioriterer Zion, Page, Moab og San Juan-fjellene, men gir bare kort tid i Rocky Mountain National Park.');if(state.route==='all')messages.push('Southwest + Yellowstone er først og fremst en ambisiøs sammenligningsrute: 8–10 timers Jackson–Moab og flere lange transportdager.');if(state.airport==='phx'&&state.route!=='sw')messages.push('Phoenix kan være billigst å fly til, men passer ikke med startpunktet på valgt rute. Sammenlign totalprisen før dere velger.');if(state.airport==='den'&&state.route==='sw')messages.push('Denver som startflyplass passer dårlig med sørvestruten slik den er tegnet. Da må rekkefølgen legges om.');if(state.airport==='slc'&&state.route!=='no')messages.push('Salt Lake City er ikke flyplass på denne skissen. Det krever en annen rute eller ekstra transport.');if(state.airport==='lv'&&!['lv','all'].includes(state.route))messages.push('Las Vegas ligger som start- eller sluttflyplass i egne rutealternativer (04 og 05). Velg en av dem for å se en dagsplan.');if(state.pace==='relaxed'&&state.route==='sw')messages.push('Med et rolig tempo ville jeg kuttet 1–2 stopp på sørvestruten. Den er variert, men inneholder mange hotellbytter.');if(state.pace==='relaxed'&&['lv','all'].includes(state.route))messages.push('Valgt rute er for tett for et rolig tempo. Fjern en region eller velg Colorado-ruten.');if(state.pace==='relaxed'&&state.route==='no')messages.push('Yellowstone-ruten har flere rolige parkdager, men også én svært lang kjøredag til Jackson.');if(state.zion&&state.route==='sw')messages.push('Zion er lagt inn i sørvestskissen. Da forsvinner Moabs hele opplevelsesdag, og dere får to krevende kjøredager på rad.');if(state.zion&&!['sw','lv','all'].includes(state.route))messages.push('Zion-knappen endrer bare rute 02. Rute 04 og 05 har Zion innebygd, mens rute 01 og 03 ikke inkluderer den.');if(state.vegas&&!['lv','all'].includes(state.route))messages.push('Velg Las Vegas-ruten (04) eller Grand Western Loop (05) for å se en reell dagsplan med Las Vegas.');if(state.yellowstone&&!['no','all'].includes(state.route))messages.push('Yellowstone ligger i rute 03 og 05. Velg rute 05 hvis dere vil kombinere parken med Southwest, men vær forberedt på svært mye kjøring.');if(!messages.length)messages.push('Dere utforsker nå '+r.name+'. Begynn gjerne med å veksle mellom rutene og merke favoritter i ønskelisten.');$('choice-summary').innerHTML='<b>Hva betyr valgene?</b><br>'+messages.map(escapeHTML).join('<br><br>')}
 function renderCompare(){$('compare-grid').innerHTML=Object.entries(routes).filter(([id])=>id!=='custom').map(([id,r])=>`<div class="compare-card ${id==='sw'?'recommended':''}"><div class="cmp-icon">${({co:'⛰',sw:'🌵',no:'♨',lv:'🎰',all:'🦬',mr:'🗿'})[id]||'🚗'}</div><h3>${r.name}</h3><p>${r.desc}</p><div class="cmp-row"><span>Fly</span><strong>${r.airport}</strong></div><div class="cmp-row"><span>Fremste fordel</span><strong>${r.pros}</strong></div><div class="cmp-row"><span>Største kompromiss</span><strong>${r.cons}</strong></div><div class="cmp-row"><span>Tempo</span><strong>${r.tempo}</strong></div><div class="cmp-footer">${({sw:'★ Mest variasjon',co:'✓ Flest Colorado-stopp',no:'✓ Yellowstone prioritert',lv:'✓ Med Las Vegas',all:'⚠ Mest ambisiøs',mr:'✓ Mount Rushmore + Yellowstone'})[id]||''}</div><button class="btn ${state.route===id?'btn-dark':'btn-light'}" data-compare="${id}" style="margin-top:10px">${state.route===id?'Viser denne ruten ✓':'Vis ruten ↗'}</button></div>`).join('');document.querySelectorAll('[data-compare]').forEach(b=>b.addEventListener('click',()=>{state.route=b.dataset.compare;state.routeChosen=true;state.lastPresetRoute=state.route;state.selectedDay=0;state.selectedStop=null;save();render();document.querySelector('#ruter').scrollIntoView({behavior:'smooth'})}))}
 function renderWishes(){const filtered=wishes.filter(w=>state.filter==='all'||(state.filter==='included'&&includedWish(w))||(state.filter==='favorites'&&state.favorites.includes(w[0])));$('wishlist').innerHTML=filtered.length?filtered.map(w=>{const fav=state.favorites.includes(w[0]);const covered=includedWish(w);return `<div class="wish-card"><div><div class="wishname">${escapeHTML(w[0])}</div><div class="wishsub">${escapeHTML(w[1])} · ${covered?'✓ Med i valgt rute':'Mulig / ikke inkludert'}</div></div><button class="starbtn ${fav?'saved':''}" title="${fav?'Fjern favoritt':'Merk som viktig'}" aria-label="${fav?'Fjern':'Merk'} ${escapeHTML(w[0])} som favoritt" data-wish="${escapeHTML(w[0])}">${fav?'★':'☆'}</button></div>`}).join(''):'<p class="wish-note">Ingen steder i dette utvalget ennå. Prøv et annet filter eller merk steder med stjerner.</p>';$('fav-count').textContent=state.favorites.length+' favoritt'+(state.favorites.length===1?'':'er');document.querySelectorAll('[data-wish]').forEach(b=>b.addEventListener('click',()=>{const v=b.getAttribute('data-wish');state.favorites=state.favorites.includes(v)?state.favorites.filter(s=>s!==v):[...state.favorites,v];save();renderWishes()}));document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===state.filter))}
-function render(){renderCards();const chosen=!!(state.route&&routes[state.route]);document.querySelector('.plan-shell').hidden=!chosen;$('route-welcome').hidden=chosen;if(chosen){renderStats();renderDays();renderMap()}renderCompare();renderBuilderChoices();$('custom-current').disabled=!chosen}
+function renderTripControls(){
+ const t=tripTime(),days=$('trip-days'),mode=$('trip-mode');
+ days.value=String(t.input);mode.value=t.mode;
+ $('trip-duration-result').innerHTML=`<strong>${escapeHTML(tripDescription())}</strong>. Vi setter av én dag til utreise og ankomst USA og én dag til avreise fra USA. Hjemkomst i Norge kan være dagen etter, men telles ikke med her.`;
+ $('trip-global-warning').innerHTML=`<b>Viktig om reisedagene:</b> De seks rutene er opprinnelig skisset for 14 dager inklusive flyreiser. ${t.totalDays<14?`Valgt tidsramme er ${14-t.totalDays} dager kortere: Noen opplevelser må utgå eller kombineres.`:t.totalDays>14?`Valgt tidsramme gir ${t.totalDays-14} ekstra dager til pauser og opplevelser.`:'Dere kan endre tidsrammen over når som helst.'} Utreise/ankomst USA og avreise USA telles som to reisedager ved begge valg. Hjemkomst i Norge kan bli dagen etter og må kontrolleres mot flybillettene. Kjøretider og reservasjoner må kontrolleres før bestilling.`;
+}
+function wireTripControls(){
+ $('trip-days').addEventListener('change',e=>{const num=Number(e.target.value);if(!Number.isInteger(num)||num<7||num>24){e.target.value=state.tripDays;toast('Velg mellom 7 og 24 dager');return;}state.tripDays=num;state.selectedDay=0;state.selectedStop=null;save();render();});
+ $('trip-mode').addEventListener('change',e=>{state.tripMode=e.target.value;state.selectedDay=0;state.selectedStop=null;save();render();});
+}
+function alignItineraryHeight(){
+ const mapCol=document.querySelector('.planner-content .map-column');
+ const listCol=document.querySelector('.planner-content .day-column');
+ if(!mapCol||!listCol)return;
+ if(window.matchMedia('(max-width:940px)').matches){if(listCol.style.maxHeight)listCol.style.maxHeight='';return;}
+ if(document.querySelector('.plan-shell')?.hidden)return;
+ // Match the bottom of the Google Maps links card, not the outer map column.
+ // The map column has bottom padding; including it makes the right scroll pane too tall.
+ const mapRect=mapCol.getBoundingClientRect();
+ const mapsLinks=mapCol.querySelector('#map-external-links');
+ const linksRect=mapsLinks?.getBoundingClientRect();
+ const usableBottom=linksRect&&linksRect.height>0 ? linksRect.bottom : mapRect.bottom-parseFloat(getComputedStyle(mapCol).paddingBottom||0);
+ const h=Math.round(usableBottom-mapRect.top);
+ if(h>0){const target=h+'px';if(listCol.style.maxHeight!==target)listCol.style.maxHeight=target;}
+}
+function render(){renderTripControls();renderCards();const chosen=!!(state.route&&routes[state.route]);document.querySelector('.plan-shell').hidden=!chosen;$('route-welcome').hidden=chosen;if(chosen){renderStats();renderDays();renderMap();renderJourneyView()}else{activeKmRequest++;activeKmRoute='';}renderCompare();renderBuilderChoices();$('custom-current').disabled=!chosen;requestAnimationFrame(alignItineraryHeight)}
 
-function summary(){const r=currentRoute();const d={late:'Reisedato ikke bestemt','16-29':'Reisedato ikke bestemt','17-30':'Reisedato ikke bestemt'};const a={open:'Åpen for alle',phx:'Phoenix',den:'Denver',slc:'Salt Lake City',lv:'Las Vegas'};const p={relaxed:'Rolig',balanced:'Balansert',active:'Mye på programmet'};return ['USA ROADTRIP 2027 – MINE VALG','Tre reisekamerater • 14 dager inkl. fly','',`Valgt rute: ${r.name}`,`Foreslått fly: ${r.airport}`,`Reiseperiode: Ikke endelig bestemt`,`Egen rutebygging: ${state.customKeys.map(routeChoiceLabel).join(', ')||'Ingen valgt'}`,'',`FAVORITTER (${state.favorites.length}):`,...(state.favorites.length?state.favorites.map(x=>'- '+x):['Ingen valgt']),'', 'DAG-FOR-DAG:',...getDays().map((x,i)=>`${i+1}. ${x.title} — ${x.place} (${x.drive})`),'', 'NOTATER:',state.note||'(ingen)','', 'Dette er en foreløpig reiseskisse, ikke bekreftet rute, pris eller bestilling.'].join('\n')}
+function summary(){const r=currentRoute();const d={late:'Reisedato ikke bestemt','16-29':'Reisedato ikke bestemt','17-30':'Reisedato ikke bestemt'};const a={open:'Åpen for alle',phx:'Phoenix',den:'Denver',slc:'Salt Lake City',lv:'Las Vegas'};const p={relaxed:'Rolig',balanced:'Balansert',active:'Mye på programmet'};return ['USA ROADTRIP 2027 – MINE VALG','Tre reisekamerater • '+tripDescription(),'',`Valgt rute: ${r.name}`,`Foreslått fly: ${r.airport}`,`Reiseperiode: Ikke endelig bestemt`,`Egen rutebygging: ${state.customKeys.map(routeChoiceLabel).join(', ')||'Ingen valgt'}`,'',`FAVORITTER (${state.favorites.length}):`,...(state.favorites.length?state.favorites.map(x=>'- '+x):['Ingen valgt']),'', 'DAG-FOR-DAG:',...getDays().map((x,i)=>`${i+1}. ${x.title} — ${x.place} (${x.drive})`),'', 'NOTATER:',state.note||'(ingen)','', 'Dette er en foreløpig reiseskisse, ikke bekreftet rute, pris eller bestilling.'].join('\n')}
 async function copySummary(){const t=summary();try{await navigator.clipboard.writeText(t);toast('Oppsummeringen er kopiert ✓')}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Oppsummeringen er kopiert ✓')}catch(e2){toast('Kopiering støttes ikke her. Last ned som tekstfil i stedet.')}ta.remove()}}
 // Hvis nettsiden er publisert, kan en lenke med #min-rute= gjenopprette de delte valgene.
  try{if(location.hash.startsWith('#min-rute=')){
   const data=JSON.parse(decodeURIComponent(location.hash.substring('#min-rute='.length)));
   if(data.v===1&&Array.isArray(data.keys)&&data.keys.length<=100&&data.keys.every(k=>routeBuilderKeys.includes(k))&&['phx','den','lv','slc'].includes(data.from)&&['phx','den','lv','slc'].includes(data.to)){
     state.customKeys=[...new Set(data.keys)];state.customFrom=data.from;state.customTo=data.to;
+    if(Number.isInteger(data.tripDays)&&data.tripDays>=7&&data.tripDays<=24)state.tripDays=data.tripDays;if(['total','usa'].includes(data.tripMode))state.tripMode=data.tripMode;
     state.customOrder=optimizeStops(state.customKeys,state.customFrom,state.customTo);state.route='custom';state.routeChosen=true;state.selectedDay=0;state.selectedStop=null;save();
   }
  }}catch(e){console.info('Kunne ikke lese delt rutelenke',e)}
- placesGallery();wireBuilder();render();
+ document.querySelectorAll('[data-route-view]').forEach(btn=>btn.addEventListener('click',()=>setRouteView(btn.dataset.routeView)));
+ placesGallery();wireBuilder();wireTripControls();render();
+ if(galleryRouteOrder.includes(state.customBaseRoute)){
+  $('gallery-route-start').value=state.customBaseRoute;
+  $('gallery-route-start-notice').textContent=`Rute ${routes[state.customBaseRoute].num} brukes som utgangspunkt. Alle reisemål vises, og dere kan endre avkryssingene.`;
+ }
+ const mapPanel=document.querySelector('.planner-content .map-column');
+ if(mapPanel&&typeof ResizeObserver!=='undefined'){new ResizeObserver(alignItineraryHeight).observe(mapPanel);}
+ window.addEventListener('resize',alignItineraryHeight);
 })();
 </script>
 </body>
